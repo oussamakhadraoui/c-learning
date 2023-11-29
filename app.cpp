@@ -99,29 +99,60 @@
 // cout<<mergeAlternately(x,y);
 //     return 0;
 // }
+// #include <iostream>
+// #include <vector> 
+// #include <bits/stdc++.h>
+// using namespace std;
+
+//   int singleNumber(vector<int>& nums) {
+// unordered_map<int,int> um;
+// int x = nums.size();
+// for( int i =0;i<x;i++ ){
+//    um[nums[i]]++;
+// }
+// for (auto  i :um){
+//     if(i.second==1){
+//         return i.first;
+//     }else{
+//         return 1;
+//     }
+// }
+//     }
+// int main(void){
+// vector<int> ouusama;
+// ouusama= {1,2,4};
+// //2 2 3 4 4
+// cout<<singleNumber(ouusama);
+// return 0;
+// }
+
 #include <iostream>
 #include <vector> 
 #include <bits/stdc++.h>
 using namespace std;
 
-  int singleNumber(vector<int>& nums) {
-unordered_map<int,int> um;
-int x = nums.size();
-for( int i =0;i<x;i++ ){
-   um[nums[i]]++;
-}
-for (auto  i :um){
-    if(i.second==1){
-        return i.first;
-    }else{
-        return 1;
+   int missingNumber(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        if(nums[0]!=0){
+            return 0;
+        }
+
+        int x = nums.size();
+        int ans ;
+        for(int i =0 ;i<x-1;i++){
+          if(nums[i]!=nums[i+1]-1){
+            ans=nums[i]+1;
+            break;
+          }else{
+            ans=nums[x-1]+1;
+          }
+        }
+        return ans;
     }
-}
-    }
-int main(void){
-vector<int> ouusama;
+int main (void ){
+    
+    vector<int> ouusama;
 ouusama= {1,2,4};
-//2 2 3 4 4
-cout<<singleNumber(ouusama);
-return 0;
+cout<<missingNumber(ouusama);
+    return 0;
 }
