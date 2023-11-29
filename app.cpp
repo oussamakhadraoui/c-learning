@@ -74,28 +74,54 @@
 // }
 
 
+// #include <iostream>
+// using namespace std;
+
+
+
+//     string mergeAlternately(string word1, string word2) {
+//     string final;
+//     int totalLength=max(word1.size(),word2.size());
+//     for(int i =0;i<totalLength;i++){
+//         if (i < word1.length()) {
+//                 final += word1[i];
+//             }
+//             if (i < word2.length()) {
+//                 final += word2[i];
+//             }
+//     }
+//     return final;
+
+//     }
+// int main(){
+// string x,y;
+// cin>>x>>y;
+// cout<<mergeAlternately(x,y);
+//     return 0;
+// }
 #include <iostream>
+#include <vector> 
+#include <bits/stdc++.h>
 using namespace std;
 
-
-
-    string mergeAlternately(string word1, string word2) {
-    string final;
-    int totalLength=max(word1.size(),word2.size());
-    for(int i =0;i<totalLength;i++){
-        if (i < word1.length()) {
-                final += word1[i];
-            }
-            if (i < word2.length()) {
-                final += word2[i];
-            }
+  int singleNumber(vector<int>& nums) {
+unordered_map<int,int> um;
+int x = nums.size();
+for( int i =0;i<x;i++ ){
+   um[nums[i]]++;
+}
+for (auto  i :um){
+    if(i.second==1){
+        return i.first;
+    }else{
+        return 1;
     }
-    return final;
-
+}
     }
-int main(){
-string x,y;
-cin>>x>>y;
-cout<<mergeAlternately(x,y);
-    return 0;
+int main(void){
+vector<int> ouusama;
+ouusama= {1,2,4};
+//2 2 3 4 4
+cout<<singleNumber(ouusama);
+return 0;
 }
