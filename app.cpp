@@ -126,33 +126,91 @@
 // return 0;
 // }
 
+// #include <iostream>
+// #include <vector> 
+// #include <bits/stdc++.h>
+// using namespace std;
+
+//    int missingNumber(vector<int>& nums) {
+//         sort(nums.begin(),nums.end());
+//         if(nums[0]!=0){
+//             return 0;
+//         }
+
+//         int x = nums.size();
+//         int ans ;
+//         for(int i =0 ;i<x-1;i++){
+//           if(nums[i]!=nums[i+1]-1){
+//             ans=nums[i]+1;
+//             break;
+//           }else{
+//             ans=nums[x-1]+1;
+//           }
+//         }
+//         return ans;
+//     }
+// int main (void ){
+    
+//     vector<int> ouusama;
+// ouusama= {1,2,4};
+// cout<<missingNumber(ouusama);
+//     return 0;
+// }
+
+
+
+// solution 
+
+        // int n = s.size();
+        // for (int i = 1; i <= n / 2; i++) {
+        //     if (n % i == 0) {
+        //         string pattern = s.substr(0, i);
+        //         int j = i;
+        //         while (j < n) {
+        //             if (s.substr(j, i) != pattern) {
+        //                 break;
+        //             }
+        //             j += i;
+        //         }
+        //         if (j == n) {
+        //             return true;
+        //         }
+        //     }
+        // }
+        // return false;
+
+
 #include <iostream>
-#include <vector> 
 #include <bits/stdc++.h>
 using namespace std;
 
-   int missingNumber(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
-        if(nums[0]!=0){
-            return 0;
-        }
+    bool repeatedSubstringPattern(string s) {
 
-        int x = nums.size();
-        int ans ;
-        for(int i =0 ;i<x-1;i++){
-          if(nums[i]!=nums[i+1]-1){
-            ans=nums[i]+1;
-            break;
-          }else{
-            ans=nums[x-1]+1;
-          }
+        int size  = s.size();
+        if(size==1){
+            return false;
         }
-        return ans;
+    string patern;
+    for (int i =1;i<size;i++){
+        if(s[i]==s[0]){
+          patern=s.substr(0,i);
+          break;
+        }
     }
-int main (void ){
-    
-    vector<int> ouusama;
-ouusama= {1,2,4};
-cout<<missingNumber(ouusama);
-    return 0;
+
+for(int i = patern.size();i<size;i+=patern.size()){
+    if(s.substr(i,patern.size())!=patern){
+        return false;
+    }
+}
+return true;
+    }
+
+
+
+int main(void){
+string s = "abcabcabcabc";
+
+cout<<repeatedSubstringPattern(s);
+  return 0;
 }
