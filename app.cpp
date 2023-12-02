@@ -181,36 +181,73 @@
 
 
 #include <iostream>
+#include <stdio.h>
 #include <bits/stdc++.h>
 using namespace std;
 
-    bool repeatedSubstringPattern(string s) {
+//     bool repeatedSubstringPattern(string s) {
 
-        int size  = s.size();
-        if(size==1){
-            return false;
-        }
-    string patern;
-    for (int i =1;i<size;i++){
-        if(s[i]==s[0]){
-          patern=s.substr(0,i);
-          break;
-        }
-    }
+//         int size  = s.size();
+//         if(size==1){
+//             return false;
+//         }
+//     string patern;
+//     for (int i =1;i<size;i++){
+//         if(s[i]==s[0]){
+//           patern=s.substr(0,i);
+//           break;
+//         }
+//     }
 
-for(int i = patern.size();i<size;i+=patern.size()){
-    if(s.substr(i,patern.size())!=patern){
-        return false;
+// for(int i = patern.size();i<size;i+=patern.size()){
+//     if(s.substr(i,patern.size())!=patern){
+//         return false;
+//     }
+// }
+// return true;
+//     }
+
+   int strStr(string haystack, string needle) {
+        if(needle.find(haystack)>=0){
+          for(int x =0;x<haystack.size();x++){
+            if(haystack[x]==needle[0]){
+                return x;
+            }
+          }
+        }else{
+          return -1;
+
+        }
+
     }
+int countCharacters(vector<string>& words, string chars) {
+  vector<int> x(26,0);
+  int answer;
+  for (char i : chars){
+    x[i-'a']++;
+  }
+
+  for(string& word : words){
+    if(isTrue(word,x)){
+      answer+=word.length();
+    }
+  
+  }
+  return answer;
+
 }
-return true;
+bool isTrue(const std::string& word, std::vector<int>& counts){
+  vector <int>c(26,0);
+  for(char i :word){
+    c[i-'a']++;
+    if(c[i-'a']>counts[i-'a']){
+      return false;
     }
-
-
-
+  }
+  return true;
+}
 int main(void){
-string s = "abcabcabcabc";
-
-cout<<repeatedSubstringPattern(s);
+string x = "h";
+cout<<'b'-'a';
   return 0;
 }
