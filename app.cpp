@@ -207,47 +207,69 @@ using namespace std;
 // return true;
 //     }
 
-   int strStr(string haystack, string needle) {
-        if(needle.find(haystack)>=0){
-          for(int x =0;x<haystack.size();x++){
-            if(haystack[x]==needle[0]){
-                return x;
-            }
-          }
-        }else{
-          return -1;
+//    int strStr(string haystack, string needle) {
+//         if(needle.find(haystack)>=0){
+//           for(int x =0;x<haystack.size();x++){
+//             if(haystack[x]==needle[0]){
+//                 return x;
+//             }
+//           }
+//         }else{
+//           return -1;
 
-        }
+//         }
 
-    }
-int countCharacters(vector<string>& words, string chars) {
-  vector<int> x(26,0);
-  int answer;
-  for (char i : chars){
-    x[i-'a']++;
-  }
+//     }
+// int countCharacters(vector<string>& words, string chars) {
+//   vector<int> x(26,0);
+//   int answer;
+//   for (char i : chars){
+//     x[i-'a']++;
+//   }
 
-  for(string& word : words){
-    if(isTrue(word,x)){
-      answer+=word.length();
-    }
+//   for(string& word : words){
+//     if(isTrue(word,x)){
+//       answer+=word.length();
+//     }
   
-  }
-  return answer;
+//   }
+//   return answer;
 
-}
-bool isTrue(const std::string& word, std::vector<int>& counts){
-  vector <int>c(26,0);
-  for(char i :word){
-    c[i-'a']++;
-    if(c[i-'a']>counts[i-'a']){
-      return false;
-    }
+// }
+// bool isTrue(const std::string& word, std::vector<int>& counts){
+//   vector <int>c(26,0);
+//   for(char i :word){
+//     c[i-'a']++;
+//     if(c[i-'a']>counts[i-'a']){
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+ int minTimeToVisitAllPoints(vector<vector<int>>& points) {
+  int result;
+  if(points.size()==1){
+    return 1;
   }
-  return true;
+for (int i =0;i<points.size()-1;i++){
+
+result+= returnMaxVal(points[i],points[i+1]);
+ 
 }
+  return result;
+  }
+
+  int returnMaxVal(vector<int> & x,vector<int> & y){
+  int maxVal;
+  int xi =abs( x[0]-y[0]);
+  int yi = abs(x[1]-y[1]);
+
+  maxVal = max(xi,yi);
+    return  maxVal;
+  }
 int main(void){
-string x = "h";
-cout<<'b'-'a';
+  vector<vector<int>> points;
+  points={{1,2},{1,4},{5,6}};
+minTimeToVisitAllPoints(points);
   return 0;
 }
