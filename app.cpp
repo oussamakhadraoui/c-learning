@@ -246,30 +246,68 @@ using namespace std;
 //   }
 //   return true;
 // }
- int minTimeToVisitAllPoints(vector<vector<int>>& points) {
-  int result;
-  if(points.size()==1){
-    return 1;
-  }
-for (int i =0;i<points.size()-1;i++){
+//  int minTimeToVisitAllPoints(vector<vector<int>>& points) {
+//   int result;
+//   if(points.size()==1){
+//     return 1;
+//   }
+// for (int i =0;i<points.size()-1;i++){
 
-result+= returnMaxVal(points[i],points[i+1]);
+// result+= returnMaxVal(points[i],points[i+1]);
  
-}
-  return result;
-  }
+// }
+//   return result;
+//   }
 
-  int returnMaxVal(vector<int> & x,vector<int> & y){
-  int maxVal;
-  int xi =abs( x[0]-y[0]);
-  int yi = abs(x[1]-y[1]);
+//   int returnMaxVal(vector<int> & x,vector<int> & y){
+//   int maxVal;
+//   int xi =abs( x[0]-y[0]);
+//   int yi = abs(x[1]-y[1]);
 
-  maxVal = max(xi,yi);
-    return  maxVal;
-  }
+//   maxVal = max(xi,yi);
+//     return  maxVal;
+//   }
+
+//  string largestGoodInteger(string num) {
+//  string result ;
+// vector<int> total;
+// int max=0;
+//  result= num[0];
+//  for (int i =0;i<num.length();i++){
+//   if(result.length()==3){
+//     total.push_back(stoi(result));
+//     result= num[i];
+//   }
+//   if(num[i]==num[i+1]){
+//     result+=num[i+1];
+//   }else{
+//     result=num[i+1];
+//   }
+// }
+// if(total.size()==0){
+
+//     return "";
+// }else{
+//   for(int i=0 ;i<total.size();i++){
+//     if(total[i]>=max){
+//       max=total[i];
+//     }
+//   }
+// }
+// return to_string(max); 
+// }
+    string largestGoodInteger(string num) {
+      int result = -1;
+      for (int i=0;i<num.length()-1;i++){
+        if(num[i]==num[i+1]&&num[i]==num[i+2]){
+          result= max(result ,num[i]-'0');
+        }
+      }
+      return (result=-1)?"":string(3,result-'0');
+    }
 int main(void){
-  vector<vector<int>> points;
-  points={{1,2},{1,4},{5,6}};
-minTimeToVisitAllPoints(points);
+  // cout<<largestGoodInteger("abbbx");
+  cout<<'3'-'0';
+ 
   return 0;
 }
