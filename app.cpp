@@ -305,9 +305,18 @@ using namespace std;
       }
       return (result=-1)?"":string(3,result-'0');
     }
+
+    int totalMoney(int n) {
+        int result;
+   for(int i=0;i<n;i++){
+    result +=(n%7) + (n/7+1);
+   }
+      return result;
+      }   
+    
 int main(void){
   // cout<<largestGoodInteger("abbbx");
-  cout<<'3'-'0';
+  cout<<totalMoney(14);
  
   return 0;
 }
