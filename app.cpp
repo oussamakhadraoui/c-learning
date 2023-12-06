@@ -362,6 +362,25 @@ using namespace std;
     // for (auto  i :um){
 //     if(i.second==1){
 //         return i.first;
+
+   int mostFrequentEven(vector<int>& nums) {
+    unordered_map <int ,int> result ;
+    sort(nums.begin(), nums.end());
+    int size;
+    size=nums.size();
+    for(int i =0;i<size;i++){
+      result[nums[i]]++;
+    } 
+    int Max;
+    int final;
+  for (auto het:result){
+    if(het.second>Max){
+       Max=het.second;
+       final=het.first;
+    }
+  }
+  return final;
+  }
 int main(void){
   // cout<<largestGoodInteger("abbbx");
   vector <int> oussama;
