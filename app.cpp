@@ -313,6 +313,22 @@ using namespace std;
    }
       return result;
       }   
+       vector<int> twoSum(vector<int>& nums, int target) {
+       vector<int>  result ;
+        int toFind;
+        int size =nums.size();
+        for(int i=0;i<size;i++){
+            toFind=target-nums[i];
+            for(int x=i+1;x<size;x++){
+                if(nums[x]==toFind){
+                    result.push_back(i);
+                    result.push_back(x);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
     
 int main(void){
   // cout<<largestGoodInteger("abbbx");
