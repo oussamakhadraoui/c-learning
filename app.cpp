@@ -329,21 +329,44 @@ using namespace std;
         }
         return result;
     }
-     vector<int> twoSum(vector<int>& nums, int target) {
-   unordered_map<int,int > result ;
-   int n = nums.size();
-   for (int i=0;i<n;i++){
-    int rest = target-nums[i];
-    if(result.count(rest)){
-      return {result[rest],i};
+  //    vector<int> twoSum(vector<int>& nums, int target) {
+  //  unordered_map<int,int > result ;
+  //  int n = nums.size();
+  //  for (int i=0;i<n;i++){
+  //   int rest = target-nums[i];
+  //   if(result.count(rest)){
+  //     return {result[rest],i};
+  //   }
+  //      result[nums[i]]=i;
+  //  }
+  //  return {};
+  //   }
+               int majorityElement(vector<int>& nums) {
+       unordered_map<int ,int> result ;
+       int size = nums.size();
+       for (int i=0;i<size;i++){
+        result[nums[i]]++;
+       }
+       int Max;
+       int final;
+       int size2= result.size();
+       for(auto i: result){
+          if(i.second>=Max){
+            Max=i.second;
+            final=i.first;
+          }
+       }
+       return final;
     }
-       result[nums[i]]=i;
-   }
-   return {};
-    }
+
+    // for (auto  i :um){
+//     if(i.second==1){
+//         return i.first;
 int main(void){
   // cout<<largestGoodInteger("abbbx");
-  cout<<totalMoney(14);
+  vector <int> oussama;
+  oussama = {2,3,4};
+  cout<<majorityElement(oussama);
  
   return 0;
 }
