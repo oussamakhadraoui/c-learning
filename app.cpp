@@ -329,7 +329,18 @@ using namespace std;
         }
         return result;
     }
-    
+     vector<int> twoSum(vector<int>& nums, int target) {
+   unordered_map<int,int > result ;
+   int n = nums.size();
+   for (int i=0;i<n;i++){
+    int rest = target-nums[i];
+    if(result.count(rest)){
+      return {result[rest],i};
+    }
+       result[nums[i]]=i;
+   }
+   return {};
+    }
 int main(void){
   // cout<<largestGoodInteger("abbbx");
   cout<<totalMoney(14);
