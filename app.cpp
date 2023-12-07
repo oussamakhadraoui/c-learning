@@ -185,18 +185,34 @@
 #include <bits/stdc++.h>
 #include <string>
 using namespace std;
-int main (void){
-double oldTax,NewTax,prixAvecTax;
-cin>>oldTax>>NewTax>>prixAvecTax;
-double Prix= ((prixAvecTax*100)/(oldTax+100))*100;
-double result =round(Prix+(Prix*NewTax)/100) ;
-cout<<result/100;
+// int main (void){
+// double oldTax,NewTax,prixAvecTax;
+// cin>>oldTax>>NewTax>>prixAvecTax;
+// double Prix= ((prixAvecTax*100)/(oldTax+100))*100;
+// double result =round(Prix+(Prix*NewTax)/100) ;
+// cout<<result/100;
 
 
 
-  return 0;
+//   return 0;
+// }
+ 
+  int main (void){ 
+  
+  int x;
+
+  cin>>x;
+  cin.ignore();
+  for(int i=1;i<x+1;i++){
+  string s;
+  getline(cin,s);
+  if(i%2==1){
+cout<<s<<endl; ;
 }
-
+  
+  
+  }
+  return 0; }
 //     bool repeatedSubstringPattern(string s) {
 
 //         int size  = s.size();
