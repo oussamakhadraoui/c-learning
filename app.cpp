@@ -185,6 +185,7 @@
 #include <bits/stdc++.h>
 #include <string>
 using namespace std;
+ceil
 
 //     bool repeatedSubstringPattern(string s) {
 
@@ -403,21 +404,40 @@ for(int i;i<result.size();i++){
 
 
     
+// int main(void){
+//  int enter ;
+//  float p,d,prix;
+//   vector<float> result;
+//   cin>>enter;
+//   for(int i = 0;i<enter;i++){
+// cin>>p>>d>>prix;
+// if(d>0){
+//   result.push_back(prix/p);
+// }
+
+
+//   }
+// for(int i=0;i<result.size();i++){
+//   cout<<result[i]<<endl;
+// }
+// return 0;
+// }
 int main(void){
  int enter ;
- float p,d,prix;
+ float note;
   vector<float> result;
   cin>>enter;
   for(int i = 0;i<enter;i++){
-cin>>p>>d>>prix;
-if(d>0){
-  result.push_back(prix/p);
+cin>>note;
+
+  result.push_back(note);
 }
-
-
-  }
+note=0;
 for(int i=0;i<result.size();i++){
-  cout<<result[i]<<endl;
+  note+=result[i];
 }
+cout<<note/result.size();
 return 0;
 }
+
+
