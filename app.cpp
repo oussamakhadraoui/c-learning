@@ -422,22 +422,29 @@ for(int i;i<result.size();i++){
 // }
 // return 0;
 // }
-int main(void){
- int enter ;
- float note;
-  vector<float> result;
-  cin>>enter;
-  for(int i = 0;i<enter;i++){
-cin>>note;
+// int main(void){
+//  int enter ;
+//  float note;
+//   vector<float> result;
+//   cin>>enter;
+//   for(int i = 0;i<enter;i++){
+// cin>>note;
 
-  result.push_back(note);
-}
-note=0;
-for(int i=0;i<result.size();i++){
-  note+=result[i];
-}
-cout<<note/result.size();
-return 0;
-}
+//   result.push_back(note);
+// }
+// note=0;
+// for(int i=0;i<result.size();i++){
+//   note+=result[i];
+// }
+// cout<<note/result.size();
+// return 0;
+// }
 
 
+int main (void){
+int read;
+cin>>read;
+cout<<ceil(read/60)*45;
+
+  return 0;
+}
