@@ -183,6 +183,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <bits/stdc++.h>
+#include <string>
 using namespace std;
 
 //     bool repeatedSubstringPattern(string s) {
@@ -363,29 +364,60 @@ using namespace std;
 //     if(i.second==1){
 //         return i.first;
 
-   int mostFrequentEven(vector<int>& nums) {
-    unordered_map <int ,int> result ;
-    sort(nums.begin(), nums.end());
-    int size;
-    size=nums.size();
-    for(int i =0;i<size;i++){
-      result[nums[i]]++;
-    } 
-    int Max;
-    int final;
-  for (auto het:result){
-    if(het.second>Max){
-       Max=het.second;
-       final=het.first;
+  //  int mostFrequentEven(vector<int>& nums) {
+  //   unordered_map <int ,int> result ;
+  //   sort(nums.begin(), nums.end());
+  //   int size;
+  //   size=nums.size();
+  //   for(int i =0;i<size;i++){
+  //     result[nums[i]]++;
+  //   } 
+  //   int Max=1;
+  //   int final;
+  // for (auto het:result){
+  //   if(het.second>Max){
+  //      Max=het.second;
+  //      final=het.first;
+  //   }
+  // }
+  // return final;
+  // }
+  string largestOddNumber(string num) {
+  int enter ,p,d,prix;
+  vector<int> result;
+  cin>>enter;
+  for(int i = 0;i<enter;i++){
+cin>>p>>d>>prix;
+if(d>0){
+  result.push_back(prix/p);
+}
+
+
+  }
+for(int i;i<result.size();i++){
+
+  cout<<result[i];
+}
+
     }
-  }
-  return final;
-  }
+
+
+    
 int main(void){
-  // cout<<largestGoodInteger("abbbx");
-  vector <int> oussama;
-  oussama = {2,3,4};
-  cout<<majorityElement(oussama);
- 
-  return 0;
+ int enter ;
+ float p,d,prix;
+  vector<float> result;
+  cin>>enter;
+  for(int i = 0;i<enter;i++){
+cin>>p>>d>>prix;
+if(d>0){
+  result.push_back(prix/p);
+}
+
+
+  }
+for(int i=0;i<result.size();i++){
+  cout<<result[i]<<endl;
+}
+return 0;
 }
