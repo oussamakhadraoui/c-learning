@@ -184,6 +184,7 @@
 #include <stdio.h>
 #include <bits/stdc++.h>
 #include <string>
+#include <vector>
 using namespace std;
 // int main (void){
 // double oldTax,NewTax,prixAvecTax;
@@ -197,21 +198,43 @@ using namespace std;
 //   return 0;
 // }
  
-  int main (void){ 
+//   int main (void){ 
   
-  int x;
+//   int x;
 
+//   cin>>x;
+//   cin.ignore();
+//   for(int i=1;i<x+1;i++){
+//   string s;
+//   getline(cin,s);
+//   if(i%2==1){
+// cout<<s<<endl; ;
+// }
+  
+  
+//   }
+//   return 0; }
+  int main (void){ 
+  int x;
+  vector<string> result;
   cin>>x;
   cin.ignore();
-  for(int i=1;i<x+1;i++){
-  string s;
-  getline(cin,s);
-  if(i%2==1){
-cout<<s<<endl; ;
-}
-  
-  
+  for(int i=0;i<x;i++){
+   string st;
+   getline(cin,st);
+   result.push_back(st);
+
   }
+  int vectorLength;
+  vectorLength=result.size();
+  int Max=0;
+  for(int i=0;i<vectorLength;i++){
+    if(result[i].length()>Max){
+      Max=result[i].length();
+      cout<<result[i]<<endl;
+    }
+  }
+
   return 0; }
 //     bool repeatedSubstringPattern(string s) {
 
