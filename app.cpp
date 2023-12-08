@@ -214,28 +214,57 @@ using namespace std;
   
 //   }
 //   return 0; }
-  int main (void){ 
-  int x;
-  vector<string> result;
-  cin>>x;
-  cin.ignore();
-  for(int i=0;i<x;i++){
-   string st;
-   getline(cin,st);
-   result.push_back(st);
+  // int main (void){ 
+  // int x;
+  // vector<string> result;
+  // cin>>x;
+  // cin.ignore();
+  // for(int i=0;i<x;i++){
+  //  string st;
+  //  getline(cin,st);
+  //  result.push_back(st);
 
-  }
-  int vectorLength;
-  vectorLength=result.size();
-  int Max=0;
-  for(int i=0;i<vectorLength;i++){
-    if(result[i].length()>Max){
-      Max=result[i].length();
-      cout<<result[i]<<endl;
+  // }
+  // int vectorLength;
+  // vectorLength=result.size();
+  // int Max=0;
+  // for(int i=0;i<vectorLength;i++){
+  //   if(result[i].length()>Max){
+  //     Max=result[i].length();
+  //     cout<<result[i]<<endl;
+  //   }
+  // }
+
+  // return 0; }
+        void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+  
+       int m1,n1,t;
+       m1=m-1;
+       n1=n-1;
+       t=m+n-1;
+       while(n1>=0){
+        if(m1>=0&&nums1[m1]>=nums2[n1]){
+            nums1[t--]=nums1[m1--];
+        }else{
+ nums1[t--]=nums2[n1--];
+        }
+       }
     }
-  }
 
-  return 0; }
+  int main (void){ 
+  vector <int>merged={1,2,3};
+  vector<int>merged2={4,4,5};
+  merged=merged2;
+  for(int i =0;i<merged.size();i++){
+    cout<<merged[i]<<endl;
+  }
+  for(int i =0;i<merged2.size();i++){
+    cout<<merged2[i]<<endl;
+  }
+  
+  return 0; 
+  
+  }
 //     bool repeatedSubstringPattern(string s) {
 
 //         int size  = s.size();
