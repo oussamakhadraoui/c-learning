@@ -251,20 +251,28 @@ using namespace std;
        }
     }
 
-  int main (void){ 
-  vector <int>merged={1,2,3};
-  vector<int>merged2={4,4,5};
-  merged=merged2;
-  for(int i =0;i<merged.size();i++){
-    cout<<merged[i]<<endl;
-  }
-  for(int i =0;i<merged2.size();i++){
-    cout<<merged2[i]<<endl;
-  }
+//   int main (void){ 
+// int max = 100;
+// int matrix[max][max];
+// memset(matrix,0,sizeof(matrix));
+// int n,e;
+// cin>>n>>e;
+// for(int i=0;i<e;i++){
+//   int na,nb;
+//   cin>>na>>nb;
+//   matrix[na][nb]=1;
+// }
+// for(int i=0;i<n;i++){
+//      for(int j=0;j<n;j++){
+//      cout<<matrix[i][j]<<" ";
+// }
+// cout<<endl;
+// }
+
   
-  return 0; 
+//   return 0; 
   
-  }
+//   }
 //     bool repeatedSubstringPattern(string s) {
 
 //         int size  = s.size();
@@ -527,4 +535,24 @@ for(int i;i<result.size();i++){
 //   return 0;
 // }
 
+ int main (void){ 
+int max= 100;
+int result[max][max];
+memset(result,0,sizeof(result));
+int node,edge;
+cin>>node>>edge;
+for(int i=0;i<edge;i++){
+   int na,nb;
+   cin>>na>>nb;
+   result[na][nb]=1;
 
+}
+  for(int i =0;i<node;i++){
+  for(int j=0;j<node;j++){
+   cout<<result[i][j]; 
+  }
+cout<<endl;
+  }
+  return 0; 
+  
+  }
