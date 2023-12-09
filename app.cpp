@@ -535,24 +535,99 @@ for(int i;i<result.size();i++){
 //   return 0;
 // }
 
- int main (void){ 
-int max= 100;
-int result[max][max];
-memset(result,0,sizeof(result));
-int node,edge;
-cin>>node>>edge;
-for(int i=0;i<edge;i++){
-   int na,nb;
-   cin>>na>>nb;
-   result[na][nb]=1;
+//  int main (void){ 
+// int max= 100;
+// int result[max][max];
+// memset(result,0,sizeof(result));
+// int node,edge;
+// cin>>node>>edge;
+// for(int i=0;i<edge;i++){
+//    int na,nb;
+//    cin>>na>>nb;
+//    result[na][nb]=1;
 
-}
-  for(int i =0;i<node;i++){
-  for(int j=0;j<node;j++){
-   cout<<result[i][j]; 
-  }
-cout<<endl;
-  }
-  return 0; 
+// }
+//   for(int i =0;i<node;i++){
+//   for(int j=0;j<node;j++){
+//    cout<<result[i][j]; 
+//   }
+// cout<<endl;
+//   }
+//   return 0; 
   
+//   }
+//  int main (void){ 
+//   int Max=10;
+//   vector<int> graph[Max];
+  
+//   int node,edge;
+//   cin>>node>>edge;
+//   for(int i=0;i<edge;i++){
+//     int na,nb;
+//     cin>>na>>nb;
+//     graph[na].push_back(nb);
+//   }
+
+//   for(int i =0;i<node;i++){
+//     cout<<i<<": ";
+//     for(int j =0;j<graph[i].size();j++){
+//      cout<<graph[i][j]<<" ";
+//     }
+//     cout<<endl;
+//   }
+//   return 0; 
+//   }
+//  int main (void){
+//   int x[]={1,5,2,9,4,2};
+  
+//   int n = sizeof(x)/sizeof(x[1]);
+//   sort(x,x+n);
+//   for(int i=0;i<n;i++){
+//     cout<<x[i]<<" | ";
+//   }
+//   cout<<endl;
+//   vector<int >result(x,x+n);
+//   sort(result.begin(),result.end(),greater());
+//     for(int i=0;i<n;i++){
+//     cout<<result[i]<<" | ";
+//   }
+//   cout<<endl;
+//   cout<<n<<"  "<<result.size();
+//   return 0; 
+//   }
+struct voiture{
+  int puissance;
+  int porte;
+  voiture(int pui,int por){
+    puissance=pui,
+    porte=por;
+  }
+};
+bool comparevat(voiture v1,voiture v2)
+{
+return v1.puissance<v2.puissance;
+}
+ int main (void){
+  vector <voiture> v;
+  int n;
+  cout<<"enter the cat number ";
+  cin>>n;
+
+ while(n--){
+  int p,n;
+  cin>>p>>n;
+  v.push_back(voiture(p,n));
+ };
+
+ 
+ for(int i =0;i<v.size();i++){
+  cout<<v[i].porte<<" | "<<v[i].puissance<<endl;
+ }
+sort(v.begin(),v.end(),comparevat);
+
+cout<<endl;
+ for(int i =0;i<v.size();i++){
+  cout<<v[i].porte<<" | "<<v[i].puissance<<endl;
+ }
+  return 0; 
   }
