@@ -631,22 +631,61 @@ return v1.puissance<v2.puissance;
 //  }
 //   return 0; 
 //   }
- int main (void){
-  set<int> result;
-  result.insert(5);
-  result.insert(4);
-  result.insert(2);
-  result.insert(0);
-  result.insert(-6);
-  if(result.find(99)!=result.end()){
-    cout<<"founded";
-  }else{
-    cout<<"not founded";
-  }
-  cout<<'\n';
-  for(set<int>::iterator x=result.begin();x!=result.end();x++){
-    cout<<*x;
+//  int main (void){
+//   set<int> result;
+//   result.insert(5);
+//   result.insert(4);
+//   result.insert(2);
+//   result.insert(0);
+//   result.insert(-6);
+//   if(result.find(99)!=result.end()){
+//     cout<<"founded";
+//   }else{
+//     cout<<"not founded";
+//   }
+//   cout<<'\n';
+//   for(set<int>::iterator x=result.begin();x!=result.end();x++){
+//     cout<<*x;
 
+//   }
+//   return 0; 
+//   }
+
+bool comapree(map<string, int> & map1,map<string, int> & map2){
+   
+  
+}
+ int main (void){
+map<string, int> result;
+vector<pair<string,int> >stock;
+  int n;
+  cin>>n;
+  for(int i =0;i<n;i++){
+    int score;
+    string name;
+    cin>>name>>score;
+    if(result.find(name)!=result.end()){
+      result[name]+=score;
+    }else{
+      result[name]=score;
+    }
+    stock.push_back(make_pair(name,result[name]) );
   }
+  int Max=INT_MIN;
+  string val="";
+  for(map<string, int>::iterator it=result.begin();it!=result.end();it++){
+    if(it->second>Max){
+      Max=it->second;
+      val=it->first;
+    }
+  }
+  for (int i =0;i<n;i++){
+    if(result[stock[i].first]==Max&&stock[i].second>=Max){
+      cout<<stock[i].first;
+      return 0;
+    }
+  }
+ cout<<val;
+
   return 0; 
   }
