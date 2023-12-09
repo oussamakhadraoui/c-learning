@@ -607,27 +607,46 @@ bool comparevat(voiture v1,voiture v2)
 {
 return v1.puissance<v2.puissance;
 }
- int main (void){
-  vector <voiture> v;
-  int n;
-  cout<<"enter the cat number ";
-  cin>>n;
+//  int main (void){
+//   vector <voiture> v;
+//   int n;
+//   cout<<"enter the cat number ";
+//   cin>>n;
 
- while(n--){
-  int p,n;
-  cin>>p>>n;
-  v.push_back(voiture(p,n));
- };
+//  while(n--){
+//   int p,n;
+//   cin>>p>>n;
+//   v.push_back(voiture(p,n));
+//  };
 
  
- for(int i =0;i<v.size();i++){
-  cout<<v[i].porte<<" | "<<v[i].puissance<<endl;
- }
-sort(v.begin(),v.end(),comparevat);
+//  for(int i =0;i<v.size();i++){
+//   cout<<v[i].porte<<" | "<<v[i].puissance<<endl;
+//  }
+// sort(v.begin(),v.end(),comparevat);
 
-cout<<endl;
- for(int i =0;i<v.size();i++){
-  cout<<v[i].porte<<" | "<<v[i].puissance<<endl;
- }
+// cout<<endl;
+//  for(int i =0;i<v.size();i++){
+//   cout<<v[i].porte<<" | "<<v[i].puissance<<endl;
+//  }
+//   return 0; 
+//   }
+ int main (void){
+  set<int> result;
+  result.insert(5);
+  result.insert(4);
+  result.insert(2);
+  result.insert(0);
+  result.insert(-6);
+  if(result.find(99)!=result.end()){
+    cout<<"founded";
+  }else{
+    cout<<"not founded";
+  }
+  cout<<'\n';
+  for(set<int>::iterator x=result.begin();x!=result.end();x++){
+    cout<<*x;
+
+  }
   return 0; 
   }
