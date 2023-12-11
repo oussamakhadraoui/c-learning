@@ -763,14 +763,46 @@ return answer;
     }
 
 
-   int reverse(int x) {
+  //    int reverse(int x) {
+  //       if(x>pow(2,31)-1||x<=(-pow(2,31)-1)){
+  //           return 0;
+  //       }
+  //   vector<int> result;
+  //  long final=0;
+   
+  //       bool isNegative =false;
+  //       if(x<0){
+  //         isNegative=true;
+  //         x=abs(x);
+  //       }
+  //      while(x){
+  //       result.push_back(x%10);
+  //       x/=10;  
+  //      }
+  //      int size = result.size()-1;
+  //     for(int i=0;i<result.size();i++){
+  //       final=final+result[i]*pow(10,size);
+  //       size--;
+  //     }
+      
+  //       return isNegative? -final:final;  
+    
+
+  //   }
+        int reverse(int x){
+        int result=0;
+        while(x){
+            result=result*10+x%10;
+            x=x/10;
+            
+        }
+        return result;
         
     }
  int main (void){
+cout<<reverse(526)<<reverse(526);
 
 
-vector<int> x={1,2,2,6,6,6,6,7,10};
-cout<<findSpecialInteger(x);
   return 0; 
   }
 
