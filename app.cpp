@@ -655,37 +655,122 @@ bool comapree(map<string, int> & map1,map<string, int> & map2){
    
   
 }
- int main (void){
-map<string, int> result;
-vector<pair<string,int> >stock;
-  int n;
-  cin>>n;
-  for(int i =0;i<n;i++){
-    int score;
-    string name;
-    cin>>name>>score;
-    if(result.find(name)!=result.end()){
-      result[name]+=score;
-    }else{
-      result[name]=score;
-    }
-    stock.push_back(make_pair(name,result[name]) );
-  }
-  int Max=INT_MIN;
-  string val="";
-  for(map<string, int>::iterator it=result.begin();it!=result.end();it++){
-    if(it->second>Max){
-      Max=it->second;
-      val=it->first;
-    }
-  }
-  for (int i =0;i<n;i++){
-    if(result[stock[i].first]==Max&&stock[i].second>=Max){
-      cout<<stock[i].first;
-      return 0;
-    }
-  }
- cout<<val;
+//  int main (void){
+// map<string, int> result;
+// vector<pair<string,int> >stock;
+//   int n;
+//   cin>>n;
+//   for(int i =0;i<n;i++){
+//     int score;
+//     string name;
+//     cin>>name>>score;
+//     if(result.find(name)!=result.end()){
+//       result[name]+=score;
+//     }else{
+//       result[name]=score;
+//     }
+//     stock.push_back(make_pair(name,result[name]) );
+//   }
+//   int Max=INT_MIN;
+//   string val="";
+//   for(map<string, int>::iterator it=result.begin();it!=result.end();it++){
+//     if(it->second>Max){
+//       Max=it->second;
+//       val=it->first;
+//     }
+//   }
+//   for (int i =0;i<n;i++){
+//     if(result[stock[i].first]==Max&&stock[i].second>=Max){
+//       cout<<stock[i].first;
+//       return 0;
+//     }
+//   }
+//  cout<<val;
 
+//   return 0; 
+//   }
+      vector<vector<int>> result;
+   vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+     int size= candidates.size();
+     vector<int> stack;
+     //if target < candidate array items 
+
+     for(int i=0;i<size;i++){
+        if(candidates[i]<target){
+            stack.push_back(candidates[i]);
+        }else{
+
+        }
+     }
+
+
+     
+ return result;
+
+    }
+        vector<vector<int>> transpose(vector<vector<int>>& matrix) {
+       int m= matrix.size();
+       int n = matrix[0].size();
+       vector<vector<int>>  result;
+       vector<int> pusher;  
+        for(int j =0;j<n;j++){
+       for(int i =0;i<m;i++){
+          pusher.push_back(matrix[j][i]);
+        }
+        result.push_back(pusher);
+        pusher.clear();
+
+       }
+       return result;
+    }
+int recur(int n){
+
+}
+      int addDigits(int num) {
+
+if(num<10){
+  return num;
+}
+        vector<int>result;
+        while(num){
+          result.push_back(num%10);
+          num/=10;
+        }
+          int x=0;
+        for(int i =0;i<result.size();i++){
+        x+= result[i];
+        }
+        return addDigits(x);
+        }
+int findSpecialInteger(vector<int>& arr) {
+int size = arr.size();
+int result;
+int answer;
+unordered_map<int,int> acc;
+for(int i=0;i<size;i++){
+  acc[arr[i]]++;
+}
+for(unordered_map<int,int>::iterator it=acc.begin();it!=acc.end();it++)
+{
+  if(it->second>result){
+    result= it->second;
+    answer=it->first;
+  }
+}
+return answer;
+
+
+    }
+
+
+   int reverse(int x) {
+        
+    }
+ int main (void){
+
+
+vector<int> x={1,2,2,6,6,6,6,7,10};
+cout<<findSpecialInteger(x);
   return 0; 
   }
+
