@@ -799,8 +799,33 @@ return answer;
         return result;
         
     }
+        double maxAverageRatio(vector<vector<int>>& classes, int extraStudents) {
+       vector<double> val;
+        double result=0;
+      for(int i =0;i<classes.size();i++){
+        for(int j=0;j<classes.size();j++){
+            if(i==j){
+              result+=(classes[j][0]+extraStudents)/(double(classes[j][1])+extraStudents);
+            }else{
+              result+=classes[j][0]/double(classes[j][1]);
+            }
+        }
+        val.push_back(result);
+        result=0;
+      }
+      for(int i=0;i<val.size();i++){
+        if(result<val[i]){
+          result=val[i];
+        }
+      }
+       return double(result)/classes.size();
+    }
  int main (void){
-cout<<reverse(526)<<reverse(526);
+ 
+  vector<vector<int>> classes={ {2,4},{3,9},{4,5},{2,10}};
+
+  double x = 4/double(5);
+cout<<maxAverageRatio(classes,4);
 
 
   return 0; 
