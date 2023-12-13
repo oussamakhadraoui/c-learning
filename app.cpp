@@ -820,6 +820,29 @@ return answer;
       }
        return double(result)/classes.size();
     }
+
+      int numSpecial(vector<vector<int>>& mat) {
+       unordered_map<int,int> rows;
+       unordered_map<int,int> col;
+       int size = mat.size();
+        int result=0;
+       for(int i=0;i<size;i++){
+        for(int j=0;j<size;j++){
+          if(mat[i][j]==1){
+            rows[i]++;
+            col[j]++;
+            }
+          }
+        }
+       for(int i=0;i<size;i++){
+        for(int j=0;j<size;j++){
+          if(mat[i][j]==1&&rows[i]==1&&col[j]==1){
+             result++;
+            }
+          }
+        }
+       return result;
+    }
  int main (void){
  
   vector<vector<int>> classes={ {2,4},{3,9},{4,5},{2,10}};
