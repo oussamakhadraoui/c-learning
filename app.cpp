@@ -843,8 +843,31 @@ return answer;
         }
        return result;
     }
+    vector<vector<int>> onesMinusZeros(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+
+        vector<int> rowOnes(m, 0);
+        vector<int> colOnes(n, 0);
+
+        // Count ones in each row and column
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                rowOnes[i] += grid[i][j];
+                colOnes[j] += grid[i][j];
+            }
+        }
+
+        // Calculate the difference matrix  
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                grid[i][j] = 2 * (rowOnes[i] + colOnes[j]) - m - n;
+            }
+        }
+
+        return grid;
+    }
  int main (void){
- 
   vector<vector<int>> classes={ {2,4},{3,9},{4,5},{2,10}};
 
   double x = 4/double(5);
