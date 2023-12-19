@@ -891,8 +891,10 @@ using namespace std;
     return "";
     }
 
+  bool isAnagram(string s, string t) {
+        
+    }
  int main (void){
-  vector<vector<string>> classes={ {"B","C"},{"D","B"},{"C","A"}};
 
 
 
