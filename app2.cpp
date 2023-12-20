@@ -58,6 +58,9 @@ int FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ra
         
         return result;
     }
+      string gcdOfStrings(string str1, string str2) {
+for int         
+    }
  int main (){
   cout<<"hello";
   return 0;
