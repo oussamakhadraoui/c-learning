@@ -58,10 +58,31 @@ int FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ra
         
         return result;
     }
-      string gcdOfStrings(string str1, string str2) {
-for int         
-    }
+   
+
  int main (){
   cout<<"hello";
   return 0;
  }
+     int compareVersion(string version1, string version2) {
+        int v1,v2;
+        for(int i=0 ;i<version1.length()-1;i++){
+            if(version1[i]=='.'){
+               v1=  stoi(version1.substr(0,i-1))  ;
+                         break;
+                
+            }
+         
+        }
+         for(int i=0 ;i<version2.length()-1;i++){
+             if(version2[i]=='.'){
+               v2=  stoi(version2.substr(0,i-1))   ;
+                           break;
+                
+            }
+        }
+        
+        if (v1 < v2) return -1;
+        if (v1 > v2) return 1;
+     return 0;
+    }
