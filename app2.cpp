@@ -86,3 +86,21 @@ int FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ra
         if (v1 > v2) return 1;
      return 0;
     }
+      int lengthOfLIS(vector<int>& nums) {
+         std::vector<int> tails(nums.size(), 0);
+        int size = 0;
+
+        for (int x : nums) {
+            int i = 0, j = size;
+            while (i != j) {
+                int m = (i + j) / 2;
+                if (tails[m] < x)
+                    i = m + 1;
+                else
+                    j = m;
+            }
+            tails[i] = x;
+            if (i == size) ++size;
+        }
+        return size;
+    }
