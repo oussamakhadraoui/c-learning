@@ -104,3 +104,32 @@ int FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ra
         }
         return size;
     }
+    class Solution {
+public:
+    int dp[50001];
+    int size=0;
+    int maxVal(vector<vector<int>>&jobs,vector<int>&start,int index){
+        if(index ==size)return 0;
+        if(dp[index]!=-1)return dp[index];
+        
+        int newIndedx= lower_bound(start.begin(),start.end(),jobs[index][1])-start.begin();
+        
+    int val = max(maxVal(jobs,start,index+1),jobs[index][2]+maxVal(jobs,start,newIndedx));
+        return dp[index]=val;   
+    }
+    
+    int jobScheduling(vector<int>& startTime, vector<int>& endTime, vector<int>& profit) {
+        vector<vector <int>> jobs;
+        memset(dp,-1,sizeof(dp));
+        this->size= profit.size();
+        for(int i=0;i<size;i++){
+            jobs.push_back({startTime[i],endTime[i],profit[i]});
+        }
+        sort(jobs.begin(),jobs.end());
+        for(int i=0;i<size;i++){
+            startTime[i]=jobs[i][0];
+        }
+        
+        return maxVal(jobs,startTime,0);
+    }
+};
