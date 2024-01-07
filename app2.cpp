@@ -133,3 +133,25 @@ public:
         return maxVal(jobs,startTime,0);
     }
 };
+
+#define il long long int
+class Solution {
+public:
+ 
+    
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        int n = nums.size();
+         vector<unordered_map<il ,int>> acc(n);
+          int result=0;
+        for(int i =1;i<n;i++){
+              for(int j =0;j<i;j++){
+                  il diff=(il) nums[i]-nums[j];
+                  acc[i][diff]+=1+ acc[j][diff];
+                  result+= 1+ acc[j][diff];
+            
+              }
+            
+        }
+        return result-(n*(n-1)/2);
+    }
+};
