@@ -166,3 +166,26 @@ public:
         return root->val+rangeSumBST(root->left,low,high)+rangeSumBST(root->right,low,high);
     }
 };
+class Solution {
+public:
+     void rangeSumBST(TreeNode* root,vector<int>&x) {
+         if(root==nullptr) return;
+        if(root->left==nullptr &&root->right==nullptr){
+            x.push_back(root->val);
+               
+        } 
+      rangeSumBST(root->left,x);
+     rangeSumBST(root->right,x);
+
+       
+    }
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+          vector<int>ro1;
+          vector<int>ro2;
+     
+       rangeSumBST(root1,ro1);
+       rangeSumBST(root2,ro2);
+        return ro1==ro2;
+        
+    }
+};
