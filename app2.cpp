@@ -253,7 +253,7 @@ class Solution {
     
     return false;
 
-  }
+}
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
     memset(vis,false,sizeof(vis));
@@ -263,5 +263,41 @@ class Solution {
         }
     }
     return false;
+    }
+};
+
+///////////////////////////////////////////////////////
+//  cycle directed graph
+
+const int N=1e5;
+bool vis[N];
+bool parent[N];
+class Solution {
+   public:
+   bool dfs(int x,vector<int> adj[]){
+       vis[x]=1;
+       parent[x]=1;
+       for (int i=0;i<adj[x].size();i++){
+           int acc= adj[x][i];
+           if(vis[acc]&&parent[acc]){
+               return 1;
+           }else if(!vis[acc]&&dfs(acc,adj)){
+               return 1;
+           }
+           
+       }
+       parent[x]=0;
+       return 0;
+   }
+    // Function to detect cycle in a directed graph.
+    bool isCyclic(int V, vector<int> adj[]) {
+       memset(vis,0,sizeof(vis));
+       memset(parent,0,sizeof(parent));
+       for (int i =0;i<V;i++){
+           if(!vis[i]&&dfs(i,adj)){
+               return 1;
+           }
+       }
+       return 0;
     }
 };
