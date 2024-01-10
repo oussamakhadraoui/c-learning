@@ -231,3 +231,37 @@ class Solution {
         return  bfs(0,adj);
     }
 };
+
+/////////////////
+
+const int N = 1e5;
+bool vis[N];
+
+class Solution {
+  public:
+  bool dfs(int pos,int parent , vector<int> adj[]){
+    vis[pos]=true;
+    
+    for(int i =0;i<adj[pos].size();i++){
+        int x = adj[pos][i];
+        if(vis[x]&&parent!=x){
+            return true;
+        }else if(!vis[x]&&dfs(x,pos,adj)){
+            return true;
+        }
+    }
+    
+    return false;
+
+  }
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+    memset(vis,false,sizeof(vis));
+    for (int i =0;i<V;i++){
+        if(!vis[i]&&dfs(i,-1,adj)){
+            return true;
+        }
+    }
+    return false;
+    }
+};
