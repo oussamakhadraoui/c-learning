@@ -373,3 +373,22 @@ private:
         differ(root->right, minVal, maxVal);
     }
 };
+
+class Solution {
+public:
+    bool halvesAreAlike(string s) {
+        
+        int x=0,y=0;
+        int size = s.size()/2;
+     unordered_set<char> vol = {'a', 'e', 'i', 'o', 'u'};
+     for(int i =0;i<size;i++){
+         if(vol.contains( tolower(s[i]))){
+             x++;
+         }
+         if(vol.contains(tolower( s[size+i]))){
+             y++;
+         }
+     }
+        return x==y;
+    }
+};
