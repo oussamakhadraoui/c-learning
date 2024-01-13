@@ -410,3 +410,30 @@ public:
         return ans;
     }
 };
+// my sub hhhhhhhhh
+
+class Solution {
+public:
+    int minSteps(string s, string t) {
+        unordered_map<char,int>firstString;
+        unordered_map<char,int>secondString;
+        int size = s.size();
+        for(int i =0;i<size;i++){ 
+            if(!secondString[s[i]]) {
+                   secondString[s[i]]=0;
+            }
+               firstString[s[i]]++; 
+               secondString[t[i]]++;
+          
+            
+        }
+        int result=0;
+        unordered_map<char,int>::iterator it;
+          for(it=firstString.begin();it!=firstString.end();it++){
+              if(it->second>secondString[it->first]){
+                  result+=it->second-secondString[it->first];
+              }
+          }
+        return result;
+    }
+};
