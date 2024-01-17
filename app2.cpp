@@ -551,3 +551,26 @@ public:
         return true;
     }
 }
+
+
+    int findShortestSubArray(vector<int>& nums) {
+        unordered_map<int,int>count,first,second;
+        for(int i =0;i<nums.size();i++){
+            if(first.count(nums[i])==0)first[nums[i]]=i;
+            second[nums[i]]=i;
+            count[nums[i]]++;
+        }
+        int maxi=-1;
+        for(auto i :count){
+            maxi=max(maxi,i.second);
+        }
+        int x=INT_MAX;
+        for(auto i:count){
+            if(i.second==maxi){
+                x=min(x,second[i.first]-first[i.first]);
+            }
+        }
+        return x+1;
+
+ 
+    }
