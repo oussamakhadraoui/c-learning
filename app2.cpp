@@ -487,4 +487,67 @@ public:
 
         return true;
     }
+class RandomizedSet {
+    set<int>s;
+public:
+    RandomizedSet() {}
+    bool insert(int val) {
+        if(s.find(val) != s.end()){
+            return false;
+        }
+        s.insert(val);
+        return true;
+    }
+    bool remove(int val) {
+        if(s.find(val) == s.end()){
+            return false;
+        }
+        s.erase(val);
+        return true;
+    }
+    int getRandom() {
+        // doing mod to get in range [0, s.size()-1]
+        int pos = rand() % s.size();
+        // std::next returns an iterator pointing to the element after being advanced by certain no. of positions.
+        return *next(s.begin(), pos);
+    }
+};
+class Solution {
+public:
+//     bool uniqueOccurrences(vector<int>& arr) {
+//        unordered_map<int,int>rec;
+//         unordered_map<int,int>rec2;
+//         for (int i:arr){
+//             rec[i]++;
+//         }
+//         for(auto i:rec){
+//             if( rec2[i.second])return false;  
+//             rec2 [i.second]++;
+//         }
+        
+//         return true;
+//     }
+    bool uniqueOccurrences(vector<int>& arr) {
+        sort(arr.begin(), arr.end());
+        unordered_set<int> set;
 
+        int count = 1;
+        int size= arr.size();
+        for (int i = 1; i < size; i++) {
+            if (arr[i] == arr[i - 1])
+                ++count;
+            else {
+                if (set.count(count))
+                    return false;
+
+                set.insert(count);
+                count = 1;
+            }
+        }
+
+        if (set.count(count))
+            return false;
+
+        return true;
+    }
+}
