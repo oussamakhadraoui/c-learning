@@ -1,0 +1,48 @@
+
+class Solution {
+public:
+     string cleanSpaces(string& s, int n) {
+    int i = 0;
+    int j = 0;
+
+    while (j < n) {
+      while (j < n && s[j] == ' ')  // Skip the spaces.
+        ++j;
+      while (j < n && s[j] != ' ')  // Keep non spaces
+        s[i++] = s[j++];
+      while (j < n && s[j] == ' ')  // Skip the spaces.
+        ++j;
+      if (j < n)  // Keep only one space.
+        s[i++] = ' ';
+    }
+
+    return s.substr(0, i);
+  }
+    string reverseWords(string s) {
+        vector<string>words;
+        string word="";
+        for (int i =0;i<s.size();i++){
+            if(s[i]==' '){
+                words.push_back(word);
+                word="";
+            }else{
+                word+=s[i];
+            }
+        }
+         words.push_back(word);
+        word="";
+        for(int i=words.size()-1;i>=0;i--){
+            if(words[i]!=" "){
+              word+=words[i]+' ';  
+            }
+            
+        }
+
+        return cleanSpaces(word,word.size()-1);
+    }
+};
+
+
+
+
+try to understand the trim function
