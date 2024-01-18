@@ -574,3 +574,28 @@ public:
 
  
     }
+
+
+    class Solution {
+public:
+    string reverseVowels(string s) {
+        vector<char > volRev;
+        set<char> vol ={'a', 'e', 'i', 'o', 'u','A','E','I','O','U'};
+        for(int i =0;i<s.size();i++){
+            if(vol.contains(s[i])){
+                volRev.push_back(s[i]);
+            }
+        }
+        int x= volRev.size()-1;
+        string result="";
+        for(int i =0;i<s.size();i++){
+         if(vol.contains(s[i])){
+             result+=volRev[x];
+             x--;
+         }else{
+             result+=s[i];
+         }
+        }
+        return result;
+    }
+};
