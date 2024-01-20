@@ -728,3 +728,41 @@ public:
         return result;
     }
 };
+
+int mod=1e9+7;
+class Solution {
+public:
+    int sumSubarrayMins(vector<int>& arr) {
+      int n = arr.size();
+        vector<int>right(n,0),left(n,0);
+      stack<pair<int,int>>sLeft,sRight ;
+        for(int i=0;i<n;i++){
+            int count=1;
+            while(!sLeft.empty()&&sLeft.top().first>arr[i]){
+                count+=sLeft.top().second;
+                sLeft.pop();
+            }
+            sLeft.push({arr[i],count});
+            left[i]=count;
+            
+        }
+        
+        
+              for(int i=n-1;i>=0;i--){
+            int count=1;
+            while(!sRight.empty()&&sRight.top().first>=arr[i]){
+                count+=sRight.top().second;
+                sRight.pop();
+            }
+            sRight.push({arr[i],count});
+            right[i]=count;
+            
+        }
+        int result = 0;
+        for(int i = 0;i<n;i++){
+            result =(result+(arr[i]*(long long)(left[i]*right[i])%mod)%mod)%mod ;       
+        }  
+        return result;
+
+    }
+};
