@@ -1001,3 +1001,18 @@ result.push_back(pos[i]);
         }
         return v;
     }
+        vector<int>dp;
+    int rec(int n){
+        if(n<=0)return 0;
+        if(dp[n]!=-1)return dp[n];
+       int ans=n;
+        for(int i= 1;i*i<=n;i++){
+           ans= min(ans,1+rec(n-i*i));
+        }
+        
+        return dp[n]=ans;
+    }
+    int numSquares(int n) {
+       dp= vector<int>(n+1,-1);
+        return rec(n);
+    }
