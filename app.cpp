@@ -1016,3 +1016,17 @@ result.push_back(pos[i]);
        dp= vector<int>(n+1,-1);
         return rec(n);
     }
+
+        string frequencySort(string s) {
+        unordered_map<char,int>rec;
+        for(char c:s)rec[c]++;
+        vector<vector<char>>P(s.size()+1);
+        for(auto[key,val]:rec)P[val].push_back(key);
+        
+      string ss = "";
+        for(int i=s.size();i>=1;i--){
+            for(auto x :P[i])
+            ss.append(i,x);
+        }
+            return ss;
+    }
