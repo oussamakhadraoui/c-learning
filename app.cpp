@@ -1030,3 +1030,19 @@ result.push_back(pos[i]);
         }
             return ss;
     }
+
+
+        vector<vector<string>> groupAnagrams(vector<string>& strs) {
+         vector<vector<string>>result;
+        unordered_map<string,vector<string>>rec;
+        for(string s:strs){
+            string current = s;
+            sort(s.begin(),s.end());
+            rec[s].push_back(current);
+        }
+        for(auto [val,vec]:rec){
+            result.push_back(vec);
+            
+        }
+        return result;
+    }
