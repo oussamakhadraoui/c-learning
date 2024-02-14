@@ -961,3 +961,18 @@ result.push_back(pos[i]);
         }
         return maxCherries;
     }
+
+       int countSubstrings(string s) {
+        int result =0,n=s.size();
+        for(int center=0;center<n*2-1;++center){
+            int left = center/2,right=(center+1)/2;
+            while(left>=0&&right<n&&s[left]==s[right]){
+                --left;
+                ++right;
+                ++result;
+            }
+                
+        }
+        return result;
+        
+    }
