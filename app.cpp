@@ -904,3 +904,13 @@ result.push_back(pos[i]);
       }
     return true;
   }
+
+      int majorityElement(vector<int>& nums) {
+      int count=0, maj=-1;  
+      for(int num:nums){
+          if(count==0)maj=num;
+          
+          count+=(num==maj)?1:-1;
+      }
+        return maj;
+    }
