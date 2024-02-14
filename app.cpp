@@ -914,3 +914,50 @@ result.push_back(pos[i]);
       }
         return maj;
     }
+          int cherryPickup(vector<vector<int>>& grid) {
+        int rows = grid.size(), cols = grid[0].size();
+
+        // 'dpCurrent' holds the max cherries picked up to the i-th row for all column pairs (j1, j2).
+        vector<vector<int>> dpCurrent(cols, vector<int>(cols, -1));
+
+        // 'dpNext' to hold the temporary results for the next row computations.
+        vector<vector<int>> dpNext(cols, vector<int>(cols, -1));
+
+        // Initialize the first row situation where both persons start at the corners.
+        dpCurrent[0][cols - 1] = grid[0][0] + grid[0][cols - 1];
+
+        // Iterate over all rows of the grid starting from the second row (i=1).
+        for (int i = 1; i < rows; ++i) {
+            // Try all possible column positions for the first person (j1).
+            for (int j1 = 0; j1 < cols; ++j1) {
+                // Try all possible column positions for the second person (j2).
+                for (int j2 = 0; j2 < cols; ++j2) {
+                    // Cherries picked up by the both persons - If on the same cell, don't double count.
+                    int cherries = grid[i][j1] + (j1 == j2 ? 0 : grid[i][j2]);
+
+                    // Consider all possible moves from previous row to current row for both persons
+                    for (int prevJ1 = j1 - 1; prevJ1 <= j1 + 1; ++prevJ1) {
+                        for (int prevJ2 = j2 - 1; prevJ2 <= j2 + 1; ++prevJ2) {
+                            // If both previous positions are within bounds and a valid number of cherries was picked
+                            if (prevJ1 >= 0 && prevJ1 < cols && prevJ2 >= 0 && prevJ2 < cols && dpCurrent[prevJ1][prevJ2] != -1) {
+                                // Take the max between the current number of cherries and the newly computed value
+                                dpNext[j1][j2] = max(dpNext[j1][j2], dpCurrent[prevJ1][prevJ2] + cherries);
+                            }
+                        }
+                    }
+                }
+            }
+            // Update 'dpCurrent' with 'dpNext' and reset 'dpNext' for the next iteration.
+            swap(dpCurrent, dpNext);
+            fill(dpNext.begin(), dpNext.end(), vector<int>(cols, -1));
+        }
+
+        // Find the maximum number of cherries that can be picked by traversing the last row's 'dpCurrent'.
+        int maxCherries = 0;
+        for (int j1 = 0; j1 < cols; ++j1) {
+            for (int j2 = 0; j2 < cols; ++j2) {
+                maxCherries = max(maxCherries, dpCurrent[j1][j2]);
+            }
+        }
+        return maxCherries;
+    }
