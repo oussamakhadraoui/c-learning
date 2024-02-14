@@ -1062,3 +1062,31 @@ result.push_back(pos[i]);
         }
         return ans;
     }
+
+        string minWindow(string s, string t) {
+        unordered_map<char,int>rec;
+        for(char x:t){
+            rec[x]++;
+        }
+        int start=0,maxLen=INT_MAX,n=s.size(),j=0,i=0,count=t.size();
+        while(j<n){
+            if(rec[s[j]]>0){
+             count--; 
+            }
+            rec[s[j]]--;
+            j++;
+            while(count==0){
+                    if(j-i<maxLen){
+                    start=i;
+                    maxLen=j-i;
+                } 
+                 rec[s[i]]++;
+                if(rec[s[i]]>0){   
+                  count++; 
+                }
+            
+                  i++;
+            }
+        }
+        return maxLen==INT_MAX?"":s.substr(start,maxLen);
+    }
