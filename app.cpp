@@ -871,33 +871,19 @@
 #include <vector> 
 #include <bits/stdc++.h>
 using namespace std;
-   string destCity(vector<vector<string>>& paths) {
-    int size = paths.size();
-    set <string> stack;
-
-
-    for(auto row:paths){
-         stack.insert(row[1]);
-      //////////
-    }
-    for(auto i :paths){
-      if(stack.count(i[0])){
-         stack.erase(i[0]);
-      }
-    }
-    for(auto i :stack){
-     return i;
-}    
-    return "";
-    }
-
-  bool isAnagram(string s, string t) {
+    vector<int> rearrangeArray(vector<int>& nums) {
+        vector<int>pos,neg,result;
+        for(int num:nums){
+if(num<0){neg.push_back(num);}else{
+pos.push_back(num);
+}
+}
         
+        for(int i=0;i<pos.size();i++){
+
+result.push_back(pos[i]);
+            result.push_back(neg[i]);
+            
+}
+            return result;
     }
- int main (void){
-
-
-
-cout<<"hi"<<endl;
-  return 0; 
-  }
