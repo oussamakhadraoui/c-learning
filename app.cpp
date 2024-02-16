@@ -1249,33 +1249,62 @@ sort(nums.begin(),nums.end());
             
     //         return numbers.top();
     // }
-        stack <int>input ,output;
-    MyQueue() {
+//         stack <int>input ,output;
+//     MyQueue() {
         
-    }
+//     }
     
-    void push(int x) {
-        input.push(x);
-    }
+//     void push(int x) {
+//         input.push(x);
+//     }
     
-    int pop() {
-        int result=peek();
-        output.pop();
+//     int pop() {
+//         int result=peek();
+//         output.pop();
         
-        return result;
-    }
+//         return result;
+//     }
     
-    int peek() {
-        if(output.empty()){
-while(!input.empty()){
- output.push(input.top());
-    input.pop();
-}
+//     int peek() {
+//         if(output.empty()){
+// while(!input.empty()){
+//  output.push(input.top());
+//     input.pop();
+// }
 
-}
-        return output.top();
-    }
+// }
+//         return output.top();
+//     }
     
-    bool empty() {
-      return  input.empty()&&output.empty();
+//     bool empty() {
+//       return  input.empty()&&output.empty();
+//     }
+
+int numSubmatrixSumTarget(std::vector<std::vector<int>>& matrix, int target) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+
+        for (int row = 0; row < m; row++) {
+            for (int col = 1; col < n; col++) {
+                matrix[row][col] += matrix[row][col - 1];
+            }
+        }
+
+        int count = 0;
+
+        for (int c1 = 0; c1 < n; c1++) {
+            for (int c2 = c1; c2 < n; c2++) {
+                std::unordered_map<int, int> map;
+                map[0] = 1;
+                int sum = 0;
+
+                for (int row = 0; row < m; row++) {
+                    sum += matrix[row][c2] - (c1 > 0 ? matrix[row][c1 - 1] : 0);
+                    count += map[sum - target];
+                    map[sum]++;
+                }
+            }
+        }
+
+        return count;
     }
