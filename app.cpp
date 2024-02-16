@@ -1165,3 +1165,16 @@ sort(nums.begin(),nums.end());
         
         return dp[0];   
     }
+        int findLeastNumOfUniqueInts(vector<int>& arr, int k) {
+        unordered_map<int,int>counter;
+        for(int &num:arr)counter[num]++;
+        vector<int>v;
+        for(auto & count:counter)v.push_back(count.second);
+        sort(v.begin(),v.end());
+        int removed=0;
+        for(int i=0;i<v.size();i++){
+          removed+=v[i];
+            if(removed>k)return v.size()-i;
+        }
+        return 0 ;
+    }
