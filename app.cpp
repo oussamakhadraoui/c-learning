@@ -1205,47 +1205,77 @@ sort(nums.begin(),nums.end());
 
         return res;
     }
-        int evalRPN(vector<string>& tokens) {
-        stack<int>numbers;
+    //     int evalRPN(vector<string>& tokens) {
+    //     stack<int>numbers;
       
-         set<string>S({"+", "-", "*", "/"});
-        int result = 0;
-        for(string x:tokens){
-            if(!S.contains(x)){
-                numbers.push(stoi(x));
-            }else{
-                if(x=="+"){
-                   int x =numbers.top();
-                   numbers.pop();
-                    result=x+numbers.top();
-                     numbers.pop();
-                    numbers.push(result);
-                }
-                    if(x=="*"){
-                        int x =numbers.top();
-                   numbers.pop();
-                    result=x*numbers.top();
-                     numbers.pop();
-                    numbers.push(result);
-                }
-                    if(x=="-"){
-                        int x =numbers.top();
-                   numbers.pop();
-                    result=numbers.top()-x;
-                     numbers.pop();
-                    numbers.push(result);
-                }
-                    if(x=="/"){
-                        int x =numbers.top();
-                   numbers.pop();
-                    result=numbers.top()/x;
-                     numbers.pop();
-                    numbers.push(result);
-                }
-            }
-        }
+    //      set<string>S({"+", "-", "*", "/"});
+    //     int result = 0;
+    //     for(string x:tokens){
+    //         if(!S.contains(x)){
+    //             numbers.push(stoi(x));
+    //         }else{
+    //             if(x=="+"){
+    //                int x =numbers.top();
+    //                numbers.pop();
+    //                 result=x+numbers.top();
+    //                  numbers.pop();
+    //                 numbers.push(result);
+    //             }
+    //                 if(x=="*"){
+    //                     int x =numbers.top();
+    //                numbers.pop();
+    //                 result=x*numbers.top();
+    //                  numbers.pop();
+    //                 numbers.push(result);
+    //             }
+    //                 if(x=="-"){
+    //                     int x =numbers.top();
+    //                numbers.pop();
+    //                 result=numbers.top()-x;
+    //                  numbers.pop();
+    //                 numbers.push(result);
+    //             }
+    //                 if(x=="/"){
+    //                     int x =numbers.top();
+    //                numbers.pop();
+    //                 result=numbers.top()/x;
+    //                  numbers.pop();
+    //                 numbers.push(result);
+    //             }
+    //         }
+    //     }
       
         
             
-            return numbers.top();
+    //         return numbers.top();
+    // }
+        stack <int>input ,output;
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        input.push(x);
+    }
+    
+    int pop() {
+        int result=peek();
+        output.pop();
+        
+        return result;
+    }
+    
+    int peek() {
+        if(output.empty()){
+while(!input.empty()){
+ output.push(input.top());
+    input.pop();
+}
+
+}
+        return output.top();
+    }
+    
+    bool empty() {
+      return  input.empty()&&output.empty();
     }
