@@ -1205,3 +1205,47 @@ sort(nums.begin(),nums.end());
 
         return res;
     }
+        int evalRPN(vector<string>& tokens) {
+        stack<int>numbers;
+      
+         set<string>S({"+", "-", "*", "/"});
+        int result = 0;
+        for(string x:tokens){
+            if(!S.contains(x)){
+                numbers.push(stoi(x));
+            }else{
+                if(x=="+"){
+                   int x =numbers.top();
+                   numbers.pop();
+                    result=x+numbers.top();
+                     numbers.pop();
+                    numbers.push(result);
+                }
+                    if(x=="*"){
+                        int x =numbers.top();
+                   numbers.pop();
+                    result=x*numbers.top();
+                     numbers.pop();
+                    numbers.push(result);
+                }
+                    if(x=="-"){
+                        int x =numbers.top();
+                   numbers.pop();
+                    result=numbers.top()-x;
+                     numbers.pop();
+                    numbers.push(result);
+                }
+                    if(x=="/"){
+                        int x =numbers.top();
+                   numbers.pop();
+                    result=numbers.top()/x;
+                     numbers.pop();
+                    numbers.push(result);
+                }
+            }
+        }
+      
+        
+            
+            return numbers.top();
+    }
