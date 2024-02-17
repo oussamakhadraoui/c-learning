@@ -1308,3 +1308,21 @@ int numSubmatrixSumTarget(std::vector<std::vector<int>>& matrix, int target) {
 
         return count;
     }
+
+    string lastNonEmptyString(string s) {
+        unordered_map<char,int>mp;
+        for(char&c:s)mp[c]++;
+        string result = "";
+        int maxi=0;
+        for(auto x:mp){
+            cout<<x.first<<endl;
+            maxi=max(x.second,maxi);
+        }
+        unordered_map<char,int>mp2;
+        for(int i =0;i<s.size();i++){
+            mp2[s[i]]++;
+            if( mp2[s[i]]==maxi) result+=s[i];
+        }
+        
+        return result;
+    }
