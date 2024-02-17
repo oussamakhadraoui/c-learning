@@ -1326,3 +1326,13 @@ int numSubmatrixSumTarget(std::vector<std::vector<int>>& matrix, int target) {
         
         return result;
     }
+    int maxOperations(vector<int>& nums) {
+        int result =1;
+        int n= nums.size();
+        int x=nums[0]+nums[1];
+        for(int i =2;i<n-1;i+=2){
+            if(x==nums[i]+nums[i+1])result++;
+            else break;
+        }
+        return result;
+    }
