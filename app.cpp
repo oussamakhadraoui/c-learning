@@ -1361,3 +1361,19 @@ int numSubmatrixSumTarget(std::vector<std::vector<int>>& matrix, int target) {
         return true;
         
     }
+
+        int getDecimalValue(ListNode* head) {
+        vector<int>v;
+        int result = 0;
+        int power=0;
+        while(head!=nullptr){
+            v.push_back(head->val);  
+            head=head->next;
+        }
+        for(int i=v.size()-1;i>=0;i--){
+            result += v[i]*pow(2,power);
+          
+            power++;
+        }
+        return result;
+    }
