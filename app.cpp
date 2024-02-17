@@ -1391,3 +1391,21 @@ int numSubmatrixSumTarget(std::vector<std::vector<int>>& matrix, int target) {
         return s;
 
     }
+    ListNode* reverseList(ListNode* head) {
+        //if list is empty
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+
+        ListNode* prev=NULL;
+        ListNode* curr=head;
+        ListNode* forward=NULL;
+
+        while(curr!= NULL){
+            forward=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=forward;
+        }
+        return prev;
+    }
