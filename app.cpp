@@ -1377,3 +1377,17 @@ int numSubmatrixSumTarget(std::vector<std::vector<int>>& matrix, int target) {
         }
         return result;
     }
+
+        ListNode* middleNode(ListNode* head) {
+        
+    ListNode* s=head;
+    ListNode* f=head;
+       
+       while(f!=NULL&&f->next!=NULL){
+
+           f=f->next->next;
+           s=s->next;
+       }
+        return s;
+
+    }
