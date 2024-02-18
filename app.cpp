@@ -1409,3 +1409,46 @@ int numSubmatrixSumTarget(std::vector<std::vector<int>>& matrix, int target) {
         }
         return prev;
     }
+#define pp pair<int,int>
+#define ll long long
+class Solution {
+public:
+    int mostBooked(int n, vector<vector<int>>& v) {
+        sort(v.begin(), v.end());
+        vector<ll> dispo(n, 0);
+        vector<int> mx(n, 0);
+
+        for (auto &m:v) {
+            ll start = m[0];
+            ll duration = m[1] - start;
+            bool planned = 0;
+            int first = 0;
+            for (int i=0 ; i<n ; i++) {
+                if (start >= dispo[i]) {
+                    dispo[i] = start + duration;
+                    mx[i]++;
+                    planned = 1;
+                    break;
+                }
+
+                if (dispo[i] < dispo[first]) {
+                    first = i;
+                }
+            }
+
+            if (planned)
+                continue;
+
+            dispo[first] += duration;
+            mx[first]++;
+        }
+
+        int ans = 0;
+        for (int i=0 ; i<n ; i++) {
+            if (mx[i] > mx[ans])
+                ans = i;
+        }
+
+        return ans;
+    }
+};
