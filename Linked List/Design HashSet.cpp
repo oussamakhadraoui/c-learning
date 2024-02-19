@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
-
+#include <vector>
+using namespace std;
 class MyHashSet {
 public:
     vector<int>v;
