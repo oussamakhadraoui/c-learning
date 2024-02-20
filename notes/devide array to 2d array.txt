@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+    vector<vector<int>> result;
+        unordered_map<int,int> acc;
+        for(int i :nums){
+      
+                acc[i]++;
+            if(acc[i]>result.size()){
+                result.push_back({});  =======> add rows
+            }
+            result[acc[i]-1].push_back(i);           =====> push that element to the row
+                
+        
+        }
+        return result;
+    }
+};
