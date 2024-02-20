@@ -1,0 +1,10 @@
+Greatest Common Divisor of Strings
+
+Input: str1 = "ABABAB", str2 = "ABAB"
+Output: "AB"
+
+to make sure that theres is a pattern we need to comapre 
+str1+str2==str2str1
+if it s true then we need to calc the gcd and it s a build in function
+
+   return (str1 + str2 == str2 + str1)?  str1.substr(0, gcd(size(str1),size(str2))) :   ""  ;
