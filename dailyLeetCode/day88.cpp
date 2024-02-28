@@ -14,7 +14,7 @@ public:
     int maxDepth;
     int val;
     void dfs(TreeNode* root,int n){
-        if(root==NULL)return ;
+        if(root==nullptr)return ;
         if(n>maxDepth){
             maxDepth=n;
             val=root->val;
