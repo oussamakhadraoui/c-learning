@@ -22,3 +22,30 @@ public:
         return result;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+===> user
+    orders = relationship(
+        "Order",
+        back_populates="user",
+        foreign_keys="Order.user_id",
+    )
+
+=====> order
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user = relationship("User", back_populates="orders")
+
+
+
+
