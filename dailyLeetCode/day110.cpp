@@ -23,9 +23,9 @@ public:
         
         //deleting extra space
         while(count!=b-1){
-           // ListNode *toDelete=clone2;     
+           ListNode *toDelete=clone2;     
            clone2=clone2->next;
-           // delete(toDelete);
+           delete(toDelete);
            count++;
         }
         while(list2){
