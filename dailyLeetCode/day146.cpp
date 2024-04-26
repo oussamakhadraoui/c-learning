@@ -1,24 +1,30 @@
  #include <bits/stdc++.h>
  using namespace std;
-int dp[202][202];
-bool vis[202][202];
 class Solution {
 public:
-
-    int solve(int r, int c, vector<vector<int>> &grid){
-        if(r>=grid.size())return 0;
-        int &rs =dp[r][c];
-        if(vis[r][c])return rs;
-        vis[r][c]=1;
-        rs=1e9;
-        for(int i=0;i<grid.size();i++){
-            if(i==c)continue;
-            rs=min(rs, grid[r][i]+solve(r+1,i,grid));
-        }
-        return rs;
-    }
     int minFallingPathSum(vector<vector<int>>& grid) {
-        memset(vis,0,sizeof(vis));
-        return min(solve(0,0,grid), solve(0,1,grid));
+        int n = grid.size();
+        vector<int>row(n);
+        vector<int>prevRow(n);
+        for(int i =0;i<n;i++)row[i]=grid[0][i];
+        
+        for(int i =1;i<n;i++){
+            prevRow=row;
+           
+            for(int j=0;j<n;j++){
+              int minVal=INT_MAX;
+              for(int k=0;k<n;k++){
+                  if(k==j)continue;
+                  minVal=min(minVal,prevRow[k]);
+              }
+              row[j]=grid[i][j]+minVal;  
+            }
+            
+        }
+        int result=INT_MAX;
+        for(int i=0;i<n;i++){
+            result=min(result,row[i]);
+        }
+        return result;
     }
 };
