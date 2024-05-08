@@ -64,6 +64,7 @@ void solve(int n, vector<vector<int> > edges)
 
             if (vis[j] && i != j) {
                 arr.push_back(j);
+                j=n;
             }
         }
 
