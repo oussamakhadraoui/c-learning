@@ -12,7 +12,6 @@ public:
        if(vis[i])return;
         vis[i]=true;
         for(int& gr:graph[i]){
-            
             rec[gr]--;
             dfs(gr,rec,graph);
         }
