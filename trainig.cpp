@@ -26,8 +26,7 @@
 //  return 0;
 // }
 
-    #include <bits/stdc++.h>
-using namespace std; 
+
    
     // int numSubarraysWithSum(vector<int>& nums, int goal) {
     //     unordered_map<int,int>rec;
@@ -81,73 +80,73 @@ using namespace std;
 //     }  
 // }
 
-void solve(){
-    int x,y,z;
-    unordered_map<string,pair<int,int>>modules;
-    while(x--){
-        string x;
-        int cap;
-        int index;
-        cin>>x>>cap>>index;
-        modules[x]={index,cap};
-    }
-    unordered_map<int,pair<int,int>>viruss;
-    while(y--){
-    int x;
-    int index;
-    int cap=0;
-    cin>>x;
-    cin>>index;
-    viruss[x]={index,cap};
-    }
-    sort(viruss.begin(), viruss.end(),
-        [] (const auto& lhs, const auto& rhs) {
-    return lhs.first < rhs.first;
-    });
-    sort(modules.begin(), modules.end(),
-        [] (const auto& lhs, const auto& rhs) {
-    return lhs.first < rhs.first;
-    });
+// void solve(){
+//     int x,y,z;
+//     unordered_map<string,pair<int,int>>modules;
+//     while(x--){
+//         string x;
+//         int cap;
+//         int index;
+//         cin>>x>>cap>>index;
+//         modules[x]={index,cap};
+//     }
+//     unordered_map<int,pair<int,int>>viruss;
+//     while(y--){
+//     int x;
+//     int index;
+//     int cap=0;
+//     cin>>x;
+//     cin>>index;
+//     viruss[x]={index,cap};
+//     }
+//     sort(viruss.begin(), viruss.end(),
+//         [] (const auto& lhs, const auto& rhs) {
+//     return lhs.first < rhs.first;
+//     });
+//     sort(modules.begin(), modules.end(),
+//         [] (const auto& lhs, const auto& rhs) {
+//     return lhs.first < rhs.first;
+//     });
 
 
-    while(z--){
-        int virus;
-        string moduleName;
-        int cap;
-        cin>>virus;
-        cin>>moduleName;
-        cin>>cap;
-        if(viruss[virus].first<modules[moduleName].first){
-            if(modules[moduleName].second>cap){
-                cap=0;
-                modules[moduleName].second-=cap;
-            }else{
-                cap-=modules[moduleName].second;
-                modules[moduleName].second=0;
-        }
-            viruss[virus].second=cap;
-        };
+//     while(z--){
+//         int virus;
+//         string moduleName;
+//         int cap;
+//         cin>>virus;
+//         cin>>moduleName;
+//         cin>>cap;
+//         if(viruss[virus].first<modules[moduleName].first){
+//             if(modules[moduleName].second>cap){
+//                 cap=0;
+//                 modules[moduleName].second-=cap;
+//             }else{
+//                 cap-=modules[moduleName].second;
+//                 modules[moduleName].second=0;
+//         }
+//             viruss[virus].second=cap;
+//         };
         
-    };
-    int b=0;
-    string s="";
-    unordered_map<string,pair<int,int>>::iterator it;
-    for (it = modules.begin(); it != modules.end(); it++)
-        if(it->second.second>0){
-            s+=it->first;
-            b++;
-        }
-    cout<<x<<endl;
-    cout<<s<<endl;
-}
+//     };
+//     int b=0;
+//     string s="";
+//     unordered_map<string,pair<int,int>>::iterator it;
+//     for (it = modules.begin(); it != modules.end(); it++)
+//         if(it->second.second>0){
+//             s+=it->first;
+//             b++;
+//         }
+//     cout<<x<<endl;
+//     cout<<s<<endl;
+// }
     
     
 
 
-int main() {
-    solve();
-    return 0;
-}
+// int main() {
+//     solve();
+//     return 0;
+// }
 
 
 // OODOOD
@@ -173,3 +172,18 @@ int main() {
 // 3 E 4
 // 3 To 50
 // 3 P 2
+
+int main (){
+    int n;
+    cin>>n;
+    vector<int>result;
+    while(n){
+        result.push_back(n%2);
+        n/=2;
+    }
+    for(int i =result.size()-1;i>=0;i--){
+        cout<<result[i];
+    }
+
+    return 0;
+}
