@@ -35,3 +35,53 @@ public:
         return result;
     }
 };
+
+
+#include <bits/stdc++.h>
+using namespace std;
+class Solution {
+public:
+    vector<int> reverse(int N,int L,int R) {
+        vector<int>result;
+        for(int i =1;i<L;i++){
+          result.push_back(i);
+        }
+        for(int i =R;i>=L;i--){
+          result.push_back(i);
+        }
+       
+        for(int i =R+1;i<=N;i++){
+          result.push_back(i);
+        }
+        return result;
+    }
+
+};
+int main (){
+    int N,M;
+    cin>>N >>M;
+    vector<int>Maxi(M,0);
+    for(int i =0;i<M;i++){
+        int x;
+        cin>>x;
+        Maxi[i]=x;
+    }
+    vector<int>result(M,0);
+    for(int i =0;i<N;i++){
+        for(int i =0;i<M;i++){
+            int x;
+            cin>>x;
+            result[i]+=x;
+        }
+    }
+    bool finaly=true;
+    for(int i =0;i<M;i++){
+        if(result[i]>=Maxi[i])finaly=false;
+    }
+    if(finaly){
+        cout<<"Yes";
+    }else{
+        cout<<"No";
+    }
+    return 0;
+}
