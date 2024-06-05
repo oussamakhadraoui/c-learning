@@ -51,9 +51,7 @@
     //  return 0;
     // }
 
-#include <bits/stdc++.h>
 
-using namespace std;
 
 // void solve() {
 //     int n;
@@ -173,17 +171,170 @@ using namespace std;
 // 3 To 50
 // 3 P 2
 
-int main (){
-    int n;
-    cin>>n;
-    vector<int>result;
-    while(n){
-        result.push_back(n%2);
-        n/=2;
-    }
-    for(int i =result.size()-1;i>=0;i--){
-        cout<<result[i];
-    }
 
+// vector<vector<int>>boys;
+// vector<vector<int>>girls;
+// bool visGirls[50];
+// bool boysVis[50];
+// double dfsBoys(int holder,int size){
+//     boysVis[holder]=1;
+//     pair<double,int> distance={0,-1};
+//     for(int j=0;j<size;j++){
+//         if(boysVis[j])continue;
+//         int dis=pow(boys[holder][0]-boys[j][0],2)+pow(boys[holder][1]-boys[j][1],2);
+//         if(dis>=distance.first){
+//             distance={dis,j};
+//         }
+//     }
+//     if(distance.second==-1)return 0;
+//     return sqrt(distance.first)+dfsBoys(distance.second,size);
+// }
+// double dfsGirls(int holder,int size){
+//     visGirls[holder]=1;
+//     pair<double,int> distance={0,-1};
+//     for(int j=0;j<size;j++){
+//         if(visGirls[j])continue;
+//         int dis=pow(girls[holder][0]-girls[j][0],2)+pow(girls[holder][1]-girls[j][1],2);
+//         if(dis>=distance.first){
+//             distance={dis,j};
+//         }
+//     }
+//     if(distance.second==-1)return 0;
+//     return sqrt(distance.first)+dfsGirls(distance.second,size);
+// }
+
+
+// #include <iostream>
+// #include <bits/stdc++.h>
+// using namespace std;
+// map <string,vector<string> > M;
+// vector <string> V;
+// vector <string> names;
+// vector <string> stac;
+// string code;
+// void dfsPrint(string name){
+//     cout<<name<<'\n';
+//     vector<string> helper = M[name];
+//     for(int i =0 ;i<helper.size();++i){
+//         code+='0';
+//         dfsPrint(helper[i]);
+//     }
+//     code+='1';
+// }
+ 
+// int main() {
+//     freopen("a.txt","r",stdin);
+//     string typ;
+//     string szef;
+//     string name;
+//     string ceo = "";
+//     int j;
+//     cin>>typ;
+//     if(typ=="ENCODE"){
+//         while(cin>>name){
+//             if(name[name.size()-1]==':'){
+//                 szef= "";
+//                 for(int i =0 ;i<name.size()-1;++i){
+//                     szef+=name[i];
+//                 }
+//                 if(ceo==""){
+//                     ceo=szef;
+//                 }          
+//             }
+//             else{
+//                 M[szef].push_back(name);
+//             }
+//         }
+//         dfsPrint(ceo);
+//         cout<<code<<'\n';
+//     }
+//     else{
+//         while(cin>>name){
+//             V.push_back(name);
+//         }
+//         code = V[V.size()-1];
+//         V.pop_back();
+//         stac.push_back(V[0]);
+//         j=0;
+//         for(int i =1;i<V.size();++i){
+//             if(code[j]=='0'){
+//                 M[stac[stac.size()-1]].push_back(V[i]);
+//                 stac.push_back(V[i]);
+//                 ++j;
+//             }
+//             else{
+//                 while(code[j]=='1'){
+//                     ++j;
+//                     stac.pop_back();
+//                 }
+//                 M[stac[stac.size()-1]].push_back(V[i]);
+//                 stac.push_back(V[i]);
+//                 ++j;
+//             }
+//         }
+//         for(int i =0;i<V.size();++i){
+//             names=M[V[i]];
+            
+//             if(names.size()!=0){
+//                 cout<<V[i]<<": ";
+//                 for(int q=0;q<names.size();++q){
+//                     cout<<names[q]<<' ';
+//                 }  
+//                 cout<<'\n'; 
+//             }
+//         }
+//     }
+//     return 0;
+// }
+#include <bits/stdc++.h>
+
+using namespace std;
+// int main (){
+//     freopen("a.txt","r",stdin);
+//     int t;
+//     cin>>t;
+//     while(t--){
+
+//         int n,fav,remove;
+//         cin>>n>>fav>>remove;
+//         vector<int>num;
+//         unordered_map<int,int>occ;
+//         for(int i =0;i<n;i++){
+//             int v;
+//             cin>>v;
+//             num.push_back(v);
+//             occ[v]++;
+//         }
+//         int favo=num[fav-1];
+//         int comp=occ[favo];
+//         sort(num.rbegin(),num.rend());
+//         for(int i =0;i<remove;i++){
+//             occ[num[i]]--;
+//         }
+//         if(occ[favo]==0)cout<<"YES"<<endl;
+//         else if(occ[favo]==comp)cout<<"NO"<<endl;
+//         else if(occ[favo]<comp)cout<<"MAYBE"<<endl;
+        
+//         occ.clear();
+//         num.clear();
+//     }
+//     return 0;
+// }
+
+class Solution {
+public:
+    vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
+        sort(people.rbegin(),people.rend());
+        vector<vector<int>>result;
+        int n =people.size();
+        for(int i =0;i<n;i++){
+            result.insert(result.begin()+people[i][1],people[i]);
+        }
+        return result;
+    }
+};
+
+int main (){
+    // Solution().reconstructQueue()
     return 0;
 }
