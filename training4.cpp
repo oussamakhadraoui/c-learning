@@ -1,34 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
+class Solution {
+public:
+    long long countCompleteDayPairs(vector<int>& hours) {
+        long long result=0;
+        unordered_map<int,vector<int>>track;
+        int n= hours.size();
+        for(int i =0;i<n;i++){
+            hours[i]=hours[i]%24;
+            track[hours[i]].push_back(i);
+        }
+        for(int i =0;i<n;i++){
+            int toFind=24-hours[i];
+            if(track[toFind].size()>0){
+                for(int j=0;j<track[toFind].size();j++){
+                    if(track[toFind][j]>i)result++;
+                }
+            }
+        }
+        return result;
+        
+    }
+};
 int main(){
  freopen("a.txt","r",stdin);
- int t;
- cin>>t;
- while(t--){
-  int x,y;
-  cin>>x>>y;
-  int len=0;
-  pair<int,int> index={-1,-1};
-  for(int i =1;i<=x;i++){
-    int counter=0;
-    pair<int,int> track ={-1,-1};
-    bool isTracked=true;
-    for(int j=1;j<=y;j++){
-        char c;
-        cin>>c;
-        if(c=='#'){
-          counter++;
-          if(isTracked){
-            track={i,j};
-          }
-        }
-    }
-    if(counter>=len){
-      len=counter;
-      index=track;
-    }
-  }
-  cout<<index.first<<" "<<index.second-(len-1)/2<<endl;
- }
+ vector<int>input({12,12,30,24,24});
+ long long result=Solution().countCompleteDayPairs(input);
  return 0;
 }
