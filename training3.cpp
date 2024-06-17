@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-
+using namespace std;
 int get_pgcd(int a, int b)
 {
     int pgcd = 0;
@@ -18,40 +18,31 @@ int get_pgcd(int a, int b)
  
     return pgcd;
 }
-using namespace std;
+class Solution {
+public:
+    int heightChecker(vector<int>& heights) {
+        int result=0;
+        int n = heights.size();
+        vector<int>compare(101,0);
+        for(int i=0;i<n;i++)compare[heights[i]]++;
+        int j =0;
+        for(int i =0;i<n;i++){
+            while(!compare[j])j++;
+            cout<<compare[j]<<" "<<heights[i]<<endl;
+            if(j!=heights[i]){
+                result++;  
+            }
+            compare[j]--;
+        }
+        return result;
+    }
+};
 
 int main (){
 	freopen("a.txt","r",stdin);
-	int t,n;
-	int wrong=0;
-	int first;
-	vector<pair<int,int>>inc;
-	vector<int>num;
-	cin>>t;
-	while(t--){
-		
-		
-		cin>>n;
-		if(n==3)cout<<"YES"<<endl;
-		else{
-			
-			cin>>first;
-			
-			num.push_back(first);
-				for(int i =1;i<n;i++){
-					int numero;
-					cin>>numero;
-					num.push_back(numero);
-     inc.push_back({get_pgcd(num[i],num[i-1]),i});
-				}
-		}
-		for(int i=1;i<inc.size();i++){
-			if(inc[i].first>inc[i-1].first){
-				
-			}
-		}
-
-	}
+	vector<int>x{1,1,4,2,1,3};
+int k=5;
+ Solution().heightChecker(x);
  
 	return 0;
 }
