@@ -10,19 +10,19 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-class Solution {
-public:
-    ListNode* CreateLinkedList(vector<int>&nums){
-     ListNode* result= new ListNode();
-     ListNode* clone= result;
-     for(int i =0;i<nums.size();i++){
-        ListNode* newNode= new ListNode();
-        newNode->val=nums[i];
-        clone->next=newNode;
-        clone=clone->next;
+  class Solution {
+  public:
+      ListNode* CreateLinkedList(vector<int>&nums){
+          ListNode* result= new ListNode();
+          ListNode* clone= result;
+          for(int i =0;i<nums.size();i++){
+              ListNode* newNode= new ListNode();
+              newNode->val=nums[i];
+              clone->next=newNode;
+              clone=clone->next;
+            }
+            return result->next;
       }
-      return result->next;
-     }
     
     ListNode* partition(ListNode* head, int x) {
       ListNode* dummy= head;
