@@ -3,20 +3,49 @@
 using namespace std;
 class Solution {
 public:
-    int minKBitFlips(vector<int>& nums, int k) {
-        int result=0;
-        int n = nums.size();
-        for(int i =0;i<=(n-k);i++){
-            if(nums[i]==1)continue;
-            for(int j=i;j<(i+k);j++)nums[j]=nums[j]^1;
-            result++;
+    int maximumLength(vector<int>& nums) {
+        unordered_map<int,int>rec;
+        for(int &num:nums){
+            int rest=num%2;
+            rec[rest]++;
         }
-        return result;
+        int mini=INT_MAX;
+        for(auto & [key,val]:rec){
+            mini=min(mini,val);
+        }
+        return mini*2;
     }
 };
+#include <bits/stdc++.h>
+using namespace std;
 int main(){
-  vector<int>vec{0,0,0,1,0,1,1,0};
-  int k=3;
-  int result=Solution().minKBitFlips(vec,k);
+
+  string s,t;
+  cin>>s>>t;
+
+  int breaker=true;
+  int n =s.size();
+  int n2 =t.size();
+  for(int i =1;i<n;i++){
+    string result="";
+    for(int j=0;j<n;j+=i){
+      result+=s[j+i-1];
+    }
+    bool isOk=true;
+    int n3=result.size();
+    if(n2==n3){
+      for(int x=0;x<n2;x++){
+        if(result[x]!=t[x])isOk=false;
+      }
+      
+    }else isOk=false;
+
+    if(isOk){
+      cout<<"Yes"<<endl;
+      breaker=false;
+      i=n;
+    }
+  }
+  if(breaker)cout<<"No"<<endl;
  return 0;
 }
