@@ -323,18 +323,21 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
-        sort(people.rbegin(),people.rend());
-        vector<vector<int>>result;
-        int n =people.size();
-        for(int i =0;i<n;i++){
-            result.insert(result.begin()+people[i][1],people[i]);
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int>sum(n);
+        sum[0]=nums[0];
+        for(int i =1;i<n;i++){
+            sum[i]=sum[i-1]+nums[i];
+            if(sum[i]%k==0)return true;
         }
-        return result;
+        return false;
     }
 };
-
 int main (){
-    // Solution().reconstructQueue()
+    vector<int>v {23,2,4,6,7};
+    reverse(v.begin(),v.end());
+    int k = 6;
+    bool x= Solution().checkSubarraySum(v,k);
     return 0;
 }
