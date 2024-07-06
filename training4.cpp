@@ -50,28 +50,51 @@ using namespace std;
 //             }
 //             return result->next;
 //      }
-const int N= 15;
 class Solution {
 public:
-    int dp[N];
-    int coinChange(vector<int>& coins, int amount) {
-
-        memset(dp,amount+1,sizeof(dp));
-        dp[0]=0;
-        for(int i =1;i<=amount;i++){
-            for(int &coin:coins){
-                if((i-coin)>=0){
-                    dp[i]=min(dp[i],1+dp[i-coin]);
-                }
-            }
+    void minsZero(vector<int>&bit,int x){
+        for(int i =0;i<32;i++){
+            if(!(1<<i&x))bit[i]--;
         }
-        int result= dp[amount];
-        return result==amount+1?-1:result;
     }
+    void addZero(vector<int>&bit,int x){
+        for(int i =0;i<32;i++){
+            if(!(1<<i&x))bit[i]++;
+        }
+    }
+    int calc(vector<int>&bit){
+        int result=0;
+        for(int i =0;i<32;i++){
+            result+=(1<<i)*(bit[i]==0);
+        }
+        return result;
+    }
+    long long countSubarrays(vector<int>& nums, int k) {
+        int n =nums.size();
+        vector<int>zeroBit(32,0);
+        int i=0,j=0;
+        long long result=0;
+        int ranged=0;
+        while(j<n){
+            addZero(zeroBit,nums[j]);
+            ranged=calc(zeroBit);
+            
+            while(i<j && ranged<k){
+                minsZero(zeroBit,nums[i]);
+                ranged=calc(zeroBit);
+                
+                i++;
+            }  
+            if(ranged==k)result+=(j-i+1);
+            j++;
+        }
+        return result;
+    } 
+  
 };
 int main(){
-    vector<int>vec({2});
-  int amount=3;
-  Solution().coinChange(vec,amount);
- return 0;
+    vector<int>vec({1,2,3});
+    int amount=2;
+    int pts=Solution().countSubarrays(vec,amount);
+    return 0;
 }
