@@ -1,23 +1,19 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-const int N= 1e5+1;
 class Solution {
 public:
-    
     int coinChange(vector<int>& coins, int amount) {
-        int N=amount+1;
-        vector<int>dp(N,N);      
+        vector<int>dp(amount+1,amount+1);
         dp[0]=0;
-        for(int i =1;i<=amount;i++){
-            for(int &coin:coins){
+        for(int i =0;i<=amount;i++){
+            for(int& coin:coins){
                 if((i-coin)>=0){
                     dp[i]=min(dp[i],1+dp[i-coin]);
                 }
             }
         }
-        int result= dp[amount];
-        return result==amount+1?-1:result;
+        return dp[amount]==amount+1?-1:dp[amount];
     }
 };
 const int N= 1e5+1;
@@ -45,5 +41,28 @@ public:
         memset(dp,-1,sizeof(dp));
         int result= rec(coins,amount);
         return result==INT_MAX?-1:result;
+    }
+};
+
+//////////////////////////easy rec
+const int N=1e4+1;
+class Solution {
+public:
+    int dp[N];
+    int rec(vector<int>& coins, int amount){
+        if(amount==0)return 0;
+        if(dp[amount]!=-1)return dp[amount];
+        int result=N;
+        for(int & coin:coins){
+            if((amount-coin)>=0){
+                result=min(result,1+rec(coins,amount-coin));
+            }
+        }
+        return dp[amount]=result;
+    }
+    int coinChange(vector<int>& coins, int amount) {
+        memset(dp,-1,sizeof(dp));
+        int result= rec(coins,amount);
+        return result==N?-1:result;
     }
 };
