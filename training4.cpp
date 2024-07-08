@@ -52,49 +52,29 @@ using namespace std;
 //      }
 class Solution {
 public:
-    void minsZero(vector<int>&bit,int x){
-        for(int i =0;i<32;i++){
-            if(!(1<<i&x))bit[i]--;
+    int findTheWinner(int n, int k) {
+        queue<int>rec;
+        for(int i =k+1;i<=n;i++)rec.push(i);
+        for(int i=1;i<k;i++)rec.push(i);
+        int last=k-1;
+        while(!rec.empty()){
+            int time=k;
+            while(time--){
+                int last=rec.front();
+                rec.pop();
+                rec.push(last);
+            }
+            last=rec.front();
+            rec.pop();
         }
+        return last;
+        
     }
-    void addZero(vector<int>&bit,int x){
-        for(int i =0;i<32;i++){
-            if(!(1<<i&x))bit[i]++;
-        }
-    }
-    int calc(vector<int>&bit){
-        int result=0;
-        for(int i =0;i<32;i++){
-            result+=(1<<i)*(bit[i]==0);
-        }
-        return result;
-    }
-    long long countSubarrays(vector<int>& nums, int k) {
-        int n =nums.size();
-        vector<int>zeroBit(32,0);
-        int i=0,j=0;
-        long long result=0;
-        int ranged=0;
-        while(j<n){
-            addZero(zeroBit,nums[j]);
-            ranged=calc(zeroBit);
-            
-            while(i<j && ranged<k){
-                minsZero(zeroBit,nums[i]);
-                ranged=calc(zeroBit);
-                
-                i++;
-            }  
-            if(ranged==k)result+=(j-i+1);
-            j++;
-        }
-        return result;
-    } 
-  
 };
 int main(){
-    vector<int>vec({1,2,3});
-    int amount=2;
-    int pts=Solution().countSubarrays(vec,amount);
+    int n=6;
+    int k =5;
+    
+    int r=Solution().findTheWinner(n,k);
     return 0;
 }
