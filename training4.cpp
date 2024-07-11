@@ -1,6 +1,4 @@
-#include <bits/stdc++.h>
 
-using namespace std;
 
 
 // struct ListNode {
@@ -50,31 +48,125 @@ using namespace std;
 //             }
 //             return result->next;
 //      }
-class Solution {
-public:
-    int findTheWinner(int n, int k) {
-        queue<int>rec;
-        for(int i =k+1;i<=n;i++)rec.push(i);
-        for(int i=1;i<k;i++)rec.push(i);
-        int last=k-1;
-        while(!rec.empty()){
-            int time=k;
-            while(time--){
-                int last=rec.front();
-                rec.pop();
-                rec.push(last);
-            }
-            last=rec.front();
-            rec.pop();
-        }
-        return last;
-        
-    }
-};
-int main(){
-    int n=6;
-    int k =5;
+
+// class Solution {
+// public:
+//     int minOperations(vector<string>& logs) {
+//         stack<string>st;
+//         for(string &s:logs){
+//             if(s=="./"||st.empty())continue;
+//             else if(s=="../")st.pop();
+//             else st.push(s);
+//         }
+//         return st.size();
+//     }
+// };
+// #include <bits/stdc++.h>
+
+// using namespace std;
+// int main(){
+//     freopen("a.txt","r",stdin);
+
+//     int x,y;
+//     cin>>x>>y;
+//     vector<vector<int>>matrix(x,vector<int>(y));
+//     for(int i =0;i<x;i++){
+//         for(int j=0;j<y;j++){
+//             int num;
+//             cin>>num;
+//             matrix[i][j]=num;
+//         }
+//     }
+//     vector<vector<int>>result(x,vector<int>(y,1));
+//     for(int i =0;i<x;i++){
+//         for(int j=0;j<y;j++){
+//             if(matrix[i][j]==0){
+//                 for(int v=0;v<x;v++){
+//                     result[v][j]=0;
+//                 }
+//                 for(int v=0;v<y;v++){
+//                     result[i][v]=0;
+//                 }
+//             }
+//         }
+//     }
+//     vector<int>hor(y);
+//     vector<int>vert(x);
     
-    int r=Solution().findTheWinner(n,k);
+//     for(int i =0;i<x;i++){
+//         int res=result[i][0];
+//         for(int j=1;j<y;j++){
+//             res|=result[i][j];
+//         }
+//         vert[i]=res;
+//     }
+
+//     for(int j=0;j<y;j++){
+//         int res=result[0][j];
+//         for(int i =1;i<x;i++){
+//             res|=result[i][j];
+//         }
+//         hor[j]=res;
+//     }
+//     bool isOk=true;
+//     for(int i =0;i<x;i++){
+//         for(int j=0;j<y;j++){
+//             if(matrix[i][j]==1&&hor[j]==0&&vert[i]==0){
+//                 isOk=false;
+//                 i=x;
+//                 j=y;
+//             }
+//         }
+
+//     }
+//     if(isOk){
+//         cout<<"YES"<<endl;
+//         for(int i =0;i<x;i++){
+//             for(int j=0;j<y;j++){
+//                 cout<<result[i][j];
+//                 if(j!=(y-1))cout<<" ";
+//             }
+//             cout<<endl;
+//         }
+//     }
+//     else{
+//         cout<<"NO"<<endl;
+//     }
+//     return 0;
+// }
+#include <bits/stdc++.h>
+
+using namespace std;
+int main(){
+    freopen("a.txt","r",stdin);
+    int t;
+    cin>>t;
+    while(t--){
+        int k,jump,swim;
+        cin>>k>>jump>>swim;
+        string s="";
+        for(int i =0;i<k;i++){
+            char c;
+            cin>>c;
+            s+=c;
+        }
+        bool isOk=true;
+        for(int i =0;i<k;i++){
+            
+            if(s[i]=='L')continue;
+            else if(s[i]=='L'&&jump)jump--;
+            else if((s[i]=='W'||s[i]=='C')&&swim)swim--;
+            else{
+                isOk=false;
+                break;
+            }
+        }
+        if(isOk){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
+    }
+   
     return 0;
 }
