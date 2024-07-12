@@ -137,36 +137,38 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-int main(){
-    freopen("a.txt","r",stdin);
-    int t;
-    cin>>t;
-    while(t--){
-        int k,jump,swim;
-        cin>>k>>jump>>swim;
-        string s="";
-        for(int i =0;i<k;i++){
-            char c;
-            cin>>c;
-            s+=c;
-        }
-        bool isOk=true;
-        for(int i =0;i<k;i++){
-            
-            if(s[i]=='L')continue;
-            else if(s[i]=='L'&&jump)jump--;
-            else if((s[i]=='W'||s[i]=='C')&&swim)swim--;
-            else{
-                isOk=false;
-                break;
+// cdbcbbaaabab
+// 012345678901
+class Solution {
+public:
+    int n;
+    int gainer(vector<char>&v,vector<int>&bad,string ss,int x){
+        int result=0;
+        for(int i =1;i<n;i++){
+            if(v[i]==ss[1]&&v[i-1]==ss[0]&&!bad[i]&&!bad[i-1]){
+                result+=x;
+                bad[i]=1;
+                bad[i-1]=1;
             }
         }
-        if(isOk){
-            cout<<"YES"<<endl;
-        }else{
-            cout<<"NO"<<endl;
-        }
+        return result;
     }
-   
+    int maximumGain(string s, int x, int y) {
+        vector<char>v;
+        this->n=s.size();
+        for(char &c:s)v.push_back(c);
+        string first="ab";
+        string second="ba";
+        if(x<y){
+            swap(first,second);
+            swap(x,y);
+        }
+        vector<int>bad(n,0);
+        return gainer(v,bad,first,x)+gainer(v,bad,second,y);
+    }
+};
+int main(){
+    
+    Solution().maximumGain("cdbcbbaaabab",4,5);
     return 0;
 }
