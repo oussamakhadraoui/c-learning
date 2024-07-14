@@ -169,67 +169,95 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-class Solution {
-public:
-    vector<int> survivedRobotsHealths(vector<int>& positions, vector<int>& healths, string directions) {
-        int n = healths.size();
-        vector<vector<int>>vec;
-        for(int i =0;i<n;i++){
-            vec.push_back({positions[i],healths[i],directions[i]=='R'});
-        }
-        sort(vec.begin(),vec.end(),[](vector<int>&a,vector<int>&b){
-            return a[0]<b[0];
-        });
-        stack<vector<int>>st;
-        for(int i =0;i<n;i++){
-            if(st.empty())st.push(vec[i]);
-            else if(st.top()[2]==1&&vec[i][2]==0){
-                vector<int>clone(3);
-                for(int j=0;j<3;j++)clone[j]=st.top()[j];
-                st.pop();
-                if(clone[1]>vec[i][1]){
-                    st.push({clone[0],clone[1]-1,clone[2]});
-                }else if(clone[1]<vec[i][1]){
-                    vec[i][1]--;
-                    while(!st.empty()&&vec[i][1]>st.top()[1]&&st.top()[2]){
-                        st.pop();
-                        vec[i][1]--;
-                    }
-                    
-                    if(st.empty())st.push(vec[i]);
-                    else if(!st.top()[2])st.push(vec[i]);
-                    else{
-                        vector<int>clone2(3);
-                        for(int j=0;j<3;j++)clone2[j]=st.top()[j];
-                        st.pop();
-                        // if(clone2[1]>)st.push({clone2[0],clone2[1]-1,clone2[2]});
-                        if(vec[i][1]<clone2[1]){
-                            if(clone2[1]-1>0)st.push({clone2[0],clone2[1]-1,clone2[2]});
-                        }                        
-                    }
 
+ class Solution {
+public:
+    string countOfAtoms(string f) {
+        stack<pair<string,int>>atoms;
+        int n =f.size();
+        for(int i =0;i<n;){
+            if(f[i]=='('){
+                atoms.push({"counter break",0});
+                i++;
+                continue;
+            }
+            if(f[i]==')'){
+                string counter="";
+                i++;
+                while(i<n&&isdigit(f[i])){
+                    counter+=f[i];
+                    i++;
                 }
-                
-            }else st.push(vec[i]);
+                int num = 0;
+                for (char c : counter) {
+                    if (c >= '0' && c <= '9') {
+                        num = num * 10 + (c - '0');
+                    }
+                }
+                if(num==0)num=1;
+                atoms.push({"counter start",num});
+                continue;
+            }
+            if(isupper(f[i])){
+                string at="";
+                at+=f[i];
+                i++;
+                while(i<n&&islower(f[i])){
+                    at+=f[i];
+                    i++;
+                }
+                string counter="";
+                while(i<n&&isdigit(f[i])){
+                    counter+=f[i];
+                    i++;
+                }
+                int num = 0;
+                for (char c : counter) {
+                    if (c >= '0' && c <= '9') {
+                        num = num * 10 + (c - '0');
+                    }
+                }
+                if(num==0)num=1;
+                atoms.push({at,num});
+            }
         }
-        unordered_map<int,int>umap;
-        vector<int>result;
-        while(!st.empty()){
-            umap[st.top()[0]]=st.top()[1];
-            st.pop();
+        stack<int>time;
+        int counter=1;
+        unordered_map<string ,int>count;
+        vector<pair<string,int>>clone;
+        while(!atoms.empty()){
+            if(atoms.top().first=="counter start"){
+                counter*=atoms.top().second;
+                time.push(atoms.top().second);
+                atoms.pop();
+                continue;
+            }
+            if(atoms.top().first=="counter break"){
+                counter/=time.top();
+                time.pop();
+                atoms.pop();
+                continue;
+            }
+            count[atoms.top().first]+=atoms.top().second*counter;
+            atoms.pop();
         }
-        for(int i =0;i<n;i++){
-            if(umap[positions[i]])result.push_back(umap[positions[i]]);
-        }
+        for(auto&[a,b]:count)clone.push_back({a,b});
+        
+        string result="";
+        sort(clone.begin(),clone.end());
+        for(auto& pairo:clone)result+=pairo.first+(pairo.second>1?to_string(pairo.second):"");
         return result;
     }
 };
+
+
+
 int main(){
-    vector<int>p({34,50,42,2});
-    vector<int>h({6,27,17,38});
-    string s="LLRR";
+    vector<int>horizontalCut({1,3});
+    vector<int>verticalCut({5});
+    int  m = 3; int n = 2;
+    string s="K4(ON(SO3)2)2";
 
-
-    Solution().survivedRobotsHealths(p,h,s);
+    Solution().countOfAtoms(s);
     return 0;
 }
