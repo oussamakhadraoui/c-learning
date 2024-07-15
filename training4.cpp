@@ -170,86 +170,36 @@
 
 using namespace std;
 
- class Solution {
+#define ll long long
+
+class Solution {
 public:
-    string countOfAtoms(string f) {
-        stack<pair<string,int>>atoms;
-        int n =f.size();
-        for(int i =0;i<n;){
-            if(f[i]=='('){
-                atoms.push({"counter break",0});
-                i++;
-                continue;
-            }
-            if(f[i]==')'){
-                string counter="";
-                i++;
-                while(i<n&&isdigit(f[i])){
-                    counter+=f[i];
-                    i++;
-                }
-                int num = 0;
-                for (char c : counter) {
-                    if (c >= '0' && c <= '9') {
-                        num = num * 10 + (c - '0');
-                    }
-                }
-                if(num==0)num=1;
-                atoms.push({"counter start",num});
-                continue;
-            }
-            if(isupper(f[i])){
-                string at="";
-                at+=f[i];
-                i++;
-                while(i<n&&islower(f[i])){
-                    at+=f[i];
-                    i++;
-                }
-                string counter="";
-                while(i<n&&isdigit(f[i])){
-                    counter+=f[i];
-                    i++;
-                }
-                int num = 0;
-                for (char c : counter) {
-                    if (c >= '0' && c <= '9') {
-                        num = num * 10 + (c - '0');
-                    }
-                }
-                if(num==0)num=1;
-                atoms.push({at,num});
+    long long minimumCost(int m, int n, vector<int>& h, vector<int>& v) {
+        vector<vector<int>> t;
+
+        for (auto &a:h)
+            t.push_back({a, 1}); // 1 = hori
+
+        for (auto &a:v)
+            t.push_back({a, 0}); // 0 = vertical
+
+        int hh = 1, vv = 1;
+        ll ans = 0;
+
+        sort(t.begin(), t.end(), greater<vector<int>>());
+        for (int i=0 ; i<t.size() ; i++) {
+            if(t[i][1]) {
+                ans += vv*t[i][0];
+                hh++;
+            } else {
+                ans += hh*t[i][0];
+                vv++;
             }
         }
-        stack<int>time;
-        int counter=1;
-        unordered_map<string ,int>count;
-        vector<pair<string,int>>clone;
-        while(!atoms.empty()){
-            if(atoms.top().first=="counter start"){
-                counter*=atoms.top().second;
-                time.push(atoms.top().second);
-                atoms.pop();
-                continue;
-            }
-            if(atoms.top().first=="counter break"){
-                counter/=time.top();
-                time.pop();
-                atoms.pop();
-                continue;
-            }
-            count[atoms.top().first]+=atoms.top().second*counter;
-            atoms.pop();
-        }
-        for(auto&[a,b]:count)clone.push_back({a,b});
-        
-        string result="";
-        sort(clone.begin(),clone.end());
-        for(auto& pairo:clone)result+=pairo.first+(pairo.second>1?to_string(pairo.second):"");
-        return result;
+
+        return ans;
     }
 };
-
 
 
 int main(){
@@ -258,6 +208,6 @@ int main(){
     int  m = 3; int n = 2;
     string s="K4(ON(SO3)2)2";
 
-    Solution().countOfAtoms(s);
+    Solution().minimumCost(m,n,horizontalCut,verticalCut);
     return 0;
 }
