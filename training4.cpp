@@ -174,40 +174,45 @@ using namespace std;
 
 class Solution {
 public:
-    long long minimumCost(int m, int n, vector<int>& h, vector<int>& v) {
-        vector<vector<int>> t;
-
-        for (auto &a:h)
-            t.push_back({a, 1}); // 1 = hori
-
-        for (auto &a:v)
-            t.push_back({a, 0}); // 0 = vertical
-
-        int hh = 1, vv = 1;
-        ll ans = 0;
-
-        sort(t.begin(), t.end(), greater<vector<int>>());
-        for (int i=0 ; i<t.size() ; i++) {
-            if(t[i][1]) {
-                ans += vv*t[i][0];
-                hh++;
-            } else {
-                ans += hh*t[i][0];
-                vv++;
+    int maxProduct(vector<int>& nums) {
+        int n = nums.size();
+        int bigMax = 1;
+        long long smallMax = 1;
+        vector<long long> rec;
+        for (int& num : nums) {
+     
+            smallMax *= num;
+            
+            bigMax *= num;
+            rec.push_back(smallMax);
+            // rec.push_back(bigMax);
+            if (smallMax == 0) {
+                smallMax = 1;
             }
         }
-
-        return ans;
+        rec.push_back(bigMax);
+        bigMax = 1;
+        smallMax = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            smallMax *= nums[i];
+            bigMax *= nums[i];
+            rec.push_back(smallMax);
+            // rec.push_back(bigMax);
+            if (smallMax == 0) {
+                smallMax = 1;
+            }
+        }
+        rec.push_back(bigMax);
+        return *max_element(rec.begin(), rec.end());
     }
 };
-
-
 int main(){
     vector<int>horizontalCut({1,3});
     vector<int>verticalCut({5});
+    vector<int>test({0,10,10,10,10,10,10,10,10,10,-10,10,10,10,10,10,10,10,10,10,0});
     int  m = 3; int n = 2;
     string s="K4(ON(SO3)2)2";
 
-    Solution().minimumCost(m,n,horizontalCut,verticalCut);
+    Solution().maxProduct(test);
     return 0;
 }
