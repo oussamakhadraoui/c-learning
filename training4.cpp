@@ -172,47 +172,30 @@ using namespace std;
 
 #define ll long long
 
+
 class Solution {
 public:
-    int maxProduct(vector<int>& nums) {
-        int n = nums.size();
-        int bigMax = 1;
-        long long smallMax = 1;
-        vector<long long> rec;
-        for (int& num : nums) {
-     
-            smallMax *= num;
-            
-            bigMax *= num;
-            rec.push_back(smallMax);
-            // rec.push_back(bigMax);
-            if (smallMax == 0) {
-                smallMax = 1;
-            }
+    bool canJump(vector<int>& nums) {
+        int i =0;
+        int n=nums.size();
+        while(i<n-1){
+            if(nums[i]==0)return false;
+            i+=nums[i];
         }
-        rec.push_back(bigMax);
-        bigMax = 1;
-        smallMax = 1;
-        for (int i = n - 1; i >= 0; i--) {
-            smallMax *= nums[i];
-            bigMax *= nums[i];
-            rec.push_back(smallMax);
-            // rec.push_back(bigMax);
-            if (smallMax == 0) {
-                smallMax = 1;
-            }
-        }
-        rec.push_back(bigMax);
-        return *max_element(rec.begin(), rec.end());
+        
+        return i==(n-1);
     }
 };
-int main(){
-    vector<int>horizontalCut({1,3});
-    vector<int>verticalCut({5});
-    vector<int>test({0,10,10,10,10,10,10,10,10,10,-10,10,10,10,10,10,10,10,10,10,0});
-    int  m = 3; int n = 2;
-    string s="K4(ON(SO3)2)2";
+int main() {
+//     vector<int> nums1 = {1,1,1,1,0,0,0,5,4,3,19,17,16,15,15,15,19,19,19,19};
+ 
+// int k =20;
+//     Solution().minChanges(nums1,k);
+vector<int>nums({2,0});
+vector<int>nums1({4,6,2,4});
+Solution().canJump(nums);
 
-    Solution().maxProduct(test);
     return 0;
 }
+
+
