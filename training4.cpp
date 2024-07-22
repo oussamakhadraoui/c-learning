@@ -193,7 +193,8 @@ int main() {
 //     Solution().minChanges(nums1,k);
 vector<int>nums({2,0});
 vector<int>nums1({4,6,2,4});
-Solution().canJump(nums);
+// Solution().canJump(nums);
+   string s="12";
 
     return 0;
 }
