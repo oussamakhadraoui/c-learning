@@ -175,15 +175,25 @@ using namespace std;
 
 class Solution {
 public:
-    bool canJump(vector<int>& nums) {
-        int i =0;
-        int n=nums.size();
-        while(i<n-1){
-            if(nums[i]==0)return false;
-            i+=nums[i];
+    int longestConsecutive(vector<int>& nums) {
+        int n = nums.size();
+        int result=0;
+        unordered_map<int,int>rec;
+        for(int i =0;i<n;i++)rec[nums[i]]=1;
+        for(int i=0;i<n;i++){
+            if(rec[nums[i]-1])rec[nums[i]]=0;
         }
-        
-        return i==(n-1);
+        for(int i =0;i<n;i++){
+            int count=0;int add=0;
+            if(rec[nums[i]+add]){
+                while(rec.count(nums[i]+add)){
+                    count++;
+                    add++;
+                }
+            }
+            result=max(result,count);
+        }
+        return result;
     }
 };
 int main() {
@@ -192,11 +202,12 @@ int main() {
 // int k =20;
 //     Solution().minChanges(nums1,k);
 vector<int>nums({2,0});
-vector<int>nums1({4,6,2,4});
-// Solution().canJump(nums);
+vector<int>nums1({100,4,200,1,3,2});
+    Solution().longestConsecutive(nums1);
    string s="12";
 
     return 0;
 }
+
 
 
