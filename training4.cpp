@@ -175,23 +175,31 @@ using namespace std;
 
 class Solution {
 public:
-    int longestConsecutive(vector<int>& nums) {
-        int n = nums.size();
-        int result=0;
+    int longestArithSeqLength(vector<int>& nums) {
         unordered_map<int,int>rec;
-        for(int i =0;i<n;i++)rec[nums[i]]=1;
-        for(int i=0;i<n;i++){
-            if(rec[nums[i]-1])rec[nums[i]]=0;
+        int mini=INT_MAX;
+        int maxi=INT_MIN;
+        for(int i=0;i<nums.size();i++){
+            rec[nums[i]]=i;
+            if(nums[i]>maxi)maxi=nums[i];
+            if(nums[i]<mini)mini=nums[i];
         }
-        for(int i =0;i<n;i++){
-            int count=0;int add=0;
-            if(rec[nums[i]+add]){
-                while(rec.count(nums[i]+add)){
+        int n=maxi-mini;
+        int m=nums.size();
+        int result=0;
+        for(int i=1;i<=n;i++){
+            for(int j=0;j<m;j++){
+                int count=1;
+                int v=nums[j];
+                int prev=rec[v];
+                while(rec.find(v+i)!=rec.end()&&prev<rec[v+i]){
                     count++;
-                    add++;
+                    prev=rec[v+i];
+                    v+=i;
                 }
+                result=max(result,count);
+                
             }
-            result=max(result,count);
         }
         return result;
     }
@@ -202,8 +210,8 @@ int main() {
 // int k =20;
 //     Solution().minChanges(nums1,k);
 vector<int>nums({2,0});
-vector<int>nums1({100,4,200,1,3,2});
-    Solution().longestConsecutive(nums1);
+vector<int>nums1({20,1,15,3,10,5,8});
+    Solution().longestArithSeqLength(nums1);
    string s="12";
 
     return 0;
