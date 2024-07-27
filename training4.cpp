@@ -175,33 +175,39 @@ using namespace std;
 
 class Solution {
 public:
-    int longestArithSeqLength(vector<int>& nums) {
-        unordered_map<int,int>rec;
-        int mini=INT_MAX;
-        int maxi=INT_MIN;
-        for(int i=0;i<nums.size();i++){
-            rec[nums[i]]=i;
-            if(nums[i]>maxi)maxi=nums[i];
-            if(nums[i]<mini)mini=nums[i];
-        }
-        int n=maxi-mini;
-        int m=nums.size();
-        int result=0;
-        for(int i=1;i<=n;i++){
-            for(int j=0;j<m;j++){
-                int count=1;
-                int v=nums[j];
-                int prev=rec[v];
-                while(rec.find(v+i)!=rec.end()&&prev<rec[v+i]){
-                    count++;
-                    prev=rec[v+i];
-                    v+=i;
+    vector<double> dijekstra(int start,int end ,vector<vector<pair<int,double>>>graph,int n){
+        
+            priority_queue<pair<double,int> , vector<pair<double,int>>, greater<pair<double,int>> >pq;
+            vector<double>result;
+            vector<int>vis(n);
+            pq.push({0,start});
+            while(pq.size()){
+                double prob1=pq.top().first;
+                int node=pq.top().second;
+                pq.pop();
+                if(vis[node])continue;
+                if(node==end){
+                    result.push_back(prob1);
                 }
-                result=max(result,count);
-                
+                vis[node]=1;
+                for(auto&nn:graph[start]){
+                    double prob2=nn.second;
+                    // if(nn.first==end)result.push_back(prob1+prob2);
+                    pq.push({prob1+prob2,nn.first});
+                }
             }
+            return result;
         }
-        return result;
+    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
+        vector<vector<pair<int,double>>>graph(n);
+        for(int i =0;i<n;i++){
+            auto edge=edges[i];
+            graph[edge[0]].push_back({edge[1],succProb[i]});
+            graph[edge[1]].push_back({edge[0],succProb[i]});
+        }
+        vector<double>result=dijekstra(start,end,graph,n);
+        return *max_element(result.begin(), result.end());
+        
     }
 };
 int main() {
@@ -209,9 +215,14 @@ int main() {
  
 // int k =20;
 //     Solution().minChanges(nums1,k);
+int n=3;
+vector<vector<int>>edgo({{0,1},{1,2},{0,2}});
+vector<double>nums1({0.5,0.5,0.2});
+int start=0;
+int end =2;
 vector<int>nums({2,0});
-vector<int>nums1({20,1,15,3,10,5,8});
-    Solution().longestArithSeqLength(nums1);
+
+    Solution().maxProbability(n,edgo,nums1,start,end);
    string s="12";
 
     return 0;
