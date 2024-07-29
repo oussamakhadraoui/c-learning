@@ -23,16 +23,4 @@ vector<int> generatePrimes(int limit) {
     
     return primes;
 }
-    int nonSpecialCount(int l, int r) {
-        int limit = sqrt(r);
-        vector<int>prime=generatePrimes(limit);
-        int speceial=0;
-        for(int &p:prime){
-            int s= p*p;
-            if(s>=l&&s<=r)speceial++;
-        }
-        int tot=r-l+1;
-        int notS=tot-speceial;
-        return notS;
-    }
 };
