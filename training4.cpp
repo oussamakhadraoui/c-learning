@@ -175,39 +175,24 @@ using namespace std;
 
 class Solution {
 public:
-    vector<double> dijekstra(int start,int end ,vector<vector<pair<int,double>>>graph,int n){
-        
-            priority_queue<pair<double,int> , vector<pair<double,int>>, greater<pair<double,int>> >pq;
-            vector<double>result;
-            vector<int>vis(n);
-            pq.push({0,start});
-            while(pq.size()){
-                double prob1=pq.top().first;
-                int node=pq.top().second;
-                pq.pop();
-                if(vis[node])continue;
-                if(node==end){
-                    result.push_back(prob1);
-                }
-                vis[node]=1;
-                for(auto&nn:graph[start]){
-                    double prob2=nn.second;
-                    // if(nn.first==end)result.push_back(prob1+prob2);
-                    pq.push({prob1+prob2,nn.first});
-                }
+    int numberOfSubstrings(string s) {
+        int i =0;
+        int j =0;
+        int count1=0;
+        int count0=0;
+        int result=0;
+        while(j<s.size()){
+            count1+=(s[j]=='1');
+            count0+=(s[j]=='0');
+            while(count1<count0*count0){
+                count1-=s[i]=='1';
+                count0-=s[i]=='0';
+                i++;               
             }
-            return result;
+            if(count1>=count0)result+=(j-i+1);
+            j++;
         }
-    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
-        vector<vector<pair<int,double>>>graph(n);
-        for(int i =0;i<n;i++){
-            auto edge=edges[i];
-            graph[edge[0]].push_back({edge[1],succProb[i]});
-            graph[edge[1]].push_back({edge[0],succProb[i]});
-        }
-        vector<double>result=dijekstra(start,end,graph,n);
-        return *max_element(result.begin(), result.end());
-        
+        return result;
     }
 };
 int main() {
@@ -221,9 +206,9 @@ vector<double>nums1({0.5,0.5,0.2});
 int start=0;
 int end =2;
 vector<int>nums({2,0});
-
-    Solution().maxProbability(n,edgo,nums1,start,end);
-   string s="12";
+string s="00011";
+    Solution().numberOfSubstrings(s);
+   
 
     return 0;
 }
