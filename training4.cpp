@@ -175,24 +175,20 @@ using namespace std;
 
 class Solution {
 public:
-    int numberOfSubstrings(string s) {
-        int i =0;
-        int j =0;
-        int count1=0;
-        int count0=0;
+    int secondsToRemoveOccurrences(string s) {
         int result=0;
-        while(j<s.size()){
-            count1+=(s[j]=='1');
-            count0+=(s[j]=='0');
-            while(count1<count0*count0){
-                count1-=s[i]=='1';
-                count0-=s[i]=='0';
-                i++;               
+        while(1){
+            bool isOk=true;
+            for(int j=1;j<s.size();j++){
+                if(s[j]=='1'&&s[j-1]=='0'){
+                    s[j]=='0';s[j-1]=='1';
+                    isOk=false;   
+                };
             }
-            if(count1>=count0)result+=(j-i+1);
-            j++;
+            if(!isOk)result++;
+            else break;
         }
-        return result;
+        return result;            
     }
 };
 int main() {
@@ -207,7 +203,7 @@ int start=0;
 int end =2;
 vector<int>nums({2,0});
 string s="00011";
-    Solution().numberOfSubstrings(s);
+    Solution().secondsToRemoveOccurrences("0110101");
    
 
     return 0;
