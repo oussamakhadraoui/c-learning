@@ -166,48 +166,41 @@
 //     }
 // };
 
-#include <bits/stdc++.h>
+
+
+#include<bits/stdc++.h>
 
 using namespace std;
-
-#define ll long long
-
-
-class Solution {
-public:
-    int secondsToRemoveOccurrences(string s) {
-        int result=0;
-        while(1){
-            bool isOk=true;
-            for(int j=1;j<s.size();j++){
-                if(s[j]=='1'&&s[j-1]=='0'){
-                    s[j]=='0';s[j-1]=='1';
-                    isOk=false;   
-                };
-            }
-            if(!isOk)result++;
-            else break;
-        }
-        return result;            
+const int N=2*1e5+1;
+vector<int>dp(N+1,-1);
+const int MAX=3e5+1;
+int pre[MAX];
+int f(int x){
+    int c=0;
+    while(x){
+        c++;
+        x/=3;
     }
-};
-int main() {
-//     vector<int> nums1 = {1,1,1,1,0,0,0,5,4,3,19,17,16,15,15,15,19,19,19,19};
- 
-// int k =20;
-//     Solution().minChanges(nums1,k);
-int n=3;
-vector<vector<int>>edgo({{0,1},{1,2},{0,2}});
-vector<double>nums1({0.5,0.5,0.2});
-int start=0;
-int end =2;
-vector<int>nums({2,0});
-string s="00011";
-    Solution().secondsToRemoveOccurrences("0110101");
-   
-
-    return 0;
+    return c;
 }
 
-
-
+int main()
+{
+     freopen("a.txt","r",stdin);
+   int t;
+   cin>>t;
+   for(int i =1;i<=2*1e5;i++){
+    pre[i]+=pre[i-1]+f(i);
+   }
+   while(t--){
+       int l,r;cin>>l>>r;
+       int x= pre[r]-pre[l-1];
+       int v=f(l);
+       if((l*2+1)==f(r)){
+        cout<<10<<endl;
+        continue;
+       }
+       cout<<x+v<<endl;
+   }
+   return 0;
+}
