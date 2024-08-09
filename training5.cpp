@@ -1,64 +1,48 @@
 #include <bits/stdc++.h>
+
 using namespace std;
-
-class TrieNode {
-public:
-    TrieNode* children[26];
-    bool isEndOfWord;
-    string word;
-    TrieNode() { 
-        memset(children, NULL, sizeof(children));
-        isEndOfWord =false;
-        word="";
-    }
-} ;
-class Trie {
-public:
-    TrieNode*root;
-
-    Trie(){
-        root=new TrieNode;
-    }
-    void add(string& s){
-        TrieNode*node=root;
-        for(char& c :s){
-            if(!node->children[c-'a'])node->children[c-'a']=new TrieNode;
-            node=node->children[c-'a'];
-        }
-        node->word=s;
-        node->isEndOfWord=true;
-    }
-    bool search(string &s){
-        TrieNode*node=root;
-        for(char&c:s){
-            if(!node->children[c-'a'])return false;
-            node=node->children[c-'a'];
-        }
-        return node->isEndOfWord;
-    }
-} ;
 class Solution {
 public:
-    Trie* trie;
-    bool dfs(int start,string&s,TrieNode*root){
-        if(start==s.size())return true;
-        bool res=false;
-        bool res2=false;
-        if(root->isEndOfWord){
-            TrieNode *clone=trie->root;
-            res=dfs(start,s,clone);
+    int n,m;
+    bool mrigelBe7yetRassYousri(int i ,int j){
+        return i<n&&j<m; 
+    }
+    int numMagicSquaresInside(vector<vector<int>>& grid) {
+        this-> n = grid.size();
+        this-> m = grid[0].size();
+        if(n<3||m<3)return 0;
+        int countX=0;
+        int countY=0;
+        int result=0;
+
+        while(true){
+            int count=0;
+            for(int i =countX;i<countX+3;i++){
+                for(int j=countY;j<countY+3;j++){
+                    if(mrigelBe7yetRassYousri(i,j)&&grid[i][j]>=1&&grid[i][j]<=9)
+                    {
+                        count+=grid[i][j];
+                    }else{
+                        i=n;
+                        j=m;
+                        count=0;
+                    }
+                }
+            }
+            if(count==45)result++;
+            countY++;
+            if(countY==m&&countX==n-1)break;
+            if(countY==m){
+                countX++;
+                countY=0;
+            }
         }
-        if(root->children[s[start]-'a']) {
-            res2=dfs(start+1,s,root->children[s[start]-'a']);
-        }
-        return res||res2;
-    };
-    bool wordBreak(string s, vector<string>& wordDict) {
-        trie=new Trie;
-        for(string &s:wordDict){
-            trie->add(s);
-        }
-        TrieNode *root=trie->root;
-        return dfs(0,s,root);
+        return result;
     }
 };
+int main(){
+    vector<vector<int>>grid={{4,3,8,4},{9,5,1,9},{2,7,6,2}};
+    Solution().numMagicSquaresInside(grid);
+
+    return 0;
+}
