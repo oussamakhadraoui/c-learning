@@ -1,63 +1,33 @@
 #include <bits/stdc++.h> 
 using namespace std;
-class TrieNode{
-    public:
-    TrieNode *children[26];
-    int countEndWith;
-    int countPrerixWith;
-    bool containsKey(char c){return children[c-'a']==NULL;}
-    TrieNode *get(char c){return children[c-'a'];}
-    void put(char c,TrieNode *node){children[c-'a']=node;}
-    void increaseEnd(){countEndWith++;}
-    void increasePrefix(){countPrerixWith++;}
-    void decreaseEnd(){countEndWith--;}
-    void decreasePrefix(){countPrerixWith--;}
-    int getEnd(){return countEndWith;}
-    int getEndPrefix(){return countPrerixWith;}
-};
-class Trie{
-    private:TrieNode *root;
-    public:
-
-    Trie(){
-        root=new TrieNode();
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+   freopen("a.txt","r",stdin);
+  const int M = int(2e5) + 10;
+  vector<int> ops(M);
+  for (int i = 0; i < M; i++) {
+    ops[i] = 0;
+    int x = i;
+    while (x > 0) {
+      ops[i] += 1;
+      x /= 3;
     }
+  }
+  vector<int> pref(M + 1);
+  for (int i = 0; i < M; i++) {
+    pref[i + 1] = pref[i] + ops[i];
+  }
+  int tt;
+  cin >> tt;
+  while (tt--) {
+    int l, r;
+    cin >> l >> r;
+    int ans = pref[r + 1] - pref[l];
+    ans += ops[l];
+    cout << ans << '\n';
+  }
+  return 0;
+}
 
-    void insert(string &word){
-        TrieNode * clone=root;
-        for(char &c :word){
-            if(!clone->containsKey(c))clone->put(c,new TrieNode());
-            clone=clone->get(c);
-            clone->increasePrefix();
-        }
-        clone->increaseEnd();
-    }
 
-    int countWordsEqualTo(string &word){
-        TrieNode * clone=root;
-        for(char &c :word){
-            if(!clone->containsKey(c))return 0;;
-            clone=clone->get(c);
-        }
-        return clone->getEnd();
-    }
-
-    int countWordsStartingWith(string &word){
-        TrieNode * clone=root;
-        for(char &c :word){
-            if(!clone->containsKey(c))return 0;;
-            clone=clone->get(c);
-        }
-        return clone->getEndPrefix();        
-    }
-
-    void erase(string &word){
-        TrieNode * clone=root;
-        for(char &c :word){
-            if(!clone->containsKey(c))return;
-            clone=clone->get(c);
-            clone->decreasePrefix();
-        }
-        clone->decreaseEnd();
-    }
-};
