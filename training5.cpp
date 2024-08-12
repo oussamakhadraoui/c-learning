@@ -3,46 +3,27 @@
 using namespace std;
 class Solution {
 public:
-    int n,m;
-    bool mrigelBe7yetRassYousri(int i ,int j){
-        return i<n&&j<m; 
-    }
-    int numMagicSquaresInside(vector<vector<int>>& grid) {
-        this-> n = grid.size();
-        this-> m = grid[0].size();
-        if(n<3||m<3)return 0;
-        int countX=0;
-        int countY=0;
-        int result=0;
-
-        while(true){
-            int count=0;
-            for(int i =countX;i<countX+3;i++){
-                for(int j=countY;j<countY+3;j++){
-                    if(mrigelBe7yetRassYousri(i,j)&&grid[i][j]>=1&&grid[i][j]<=9)
-                    {
-                        count+=grid[i][j];
-                    }else{
-                        i=n;
-                        j=m;
-                        count=0;
-                    }
-                }
+    int alternatingSubarray(vector<int>& nums) {
+        int result=1;
+        int maxi=0;
+        for(int i =0;i<nums.size()-1;i++){
+            if(nums[i]==nums[i+1]-1){
+                result++;
+                maxi=max(maxi,result);
             }
-            if(count==45)result++;
-            countY++;
-            if(countY==m&&countX==n-1)break;
-            if(countY==m){
-                countX++;
-                countY=0;
+            else result=1;
+            if(nums[i]==nums[i+2]){
+                result++;
+                maxi=max(maxi,result);
             }
+            else result=1;
         }
-        return result;
+        return maxi;
     }
 };
 int main(){
-    vector<vector<int>>grid={{4,3,8,4},{9,5,1,9},{2,7,6,2}};
-    Solution().numMagicSquaresInside(grid);
+    vector<int>grid={2,3,4,3,4};
+    Solution().alternatingSubarray(grid);
 
     return 0;
 }
