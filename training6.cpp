@@ -1,33 +1,37 @@
-#include <bits/stdc++.h> 
+#include <iostream>
+#include <vector>
+
 using namespace std;
-int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
-   freopen("a.txt","r",stdin);
-  const int M = int(2e5) + 10;
-  vector<int> ops(M);
-  for (int i = 0; i < M; i++) {
-    ops[i] = 0;
-    int x = i;
-    while (x > 0) {
-      ops[i] += 1;
-      x /= 3;
+
+const int MOD = 1e9 + 7;
+
+int countMonotonicPairs(vector<int>& nums) {
+    int n = nums.size();
+    vector<vector<int>> dp(n + 1, vector<int>(51, 0));
+    dp[0][0] = 1;
+
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 0; j <= nums[i - 1]; ++j) {
+            // Transitions:
+            // 1. Current element is the same as the previous one
+            dp[i][j] = (dp[i][j] + dp[i - 1][j]) % MOD;
+            // 2. Current element is larger than the previous one
+            if (j > 0) {
+                dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % MOD;
+            }
+        }
     }
-  }
-  vector<int> pref(M + 1);
-  for (int i = 0; i < M; i++) {
-    pref[i + 1] = pref[i] + ops[i];
-  }
-  int tt;
-  cin >> tt;
-  while (tt--) {
-    int l, r;
-    cin >> l >> r;
-    int ans = pref[r + 1] - pref[l];
-    ans += ops[l];
-    cout << ans << '\n';
-  }
-  return 0;
+
+    int ans = 0;
+    for (int j = 0; j <= nums[n - 1]; ++j) {
+        // For each possible last element in arr1, calculate the number of pairs
+        ans = (ans + dp[n][j]) % MOD;
+    }
+    return ans;
 }
 
-
+int main() {
+    vector<int> nums = {2, 3, 2};
+    cout << countMonotonicPairs(nums) << endl; // Output: 4
+    return 0;
+}
