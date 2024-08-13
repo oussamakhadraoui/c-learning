@@ -165,42 +165,56 @@
 //         return gainer(v,bad,first,x)+gainer(v,bad,second,y);
 //     }
 // };
+//   freopen("a.txt", "r", stdin);
 
-
-
-#include<bits/stdc++.h>
-
+#include <bits/stdc++.h>
 using namespace std;
-const int N=2*1e5+1;
-vector<int>dp(N+1,-1);
-const int MAX=3e5+1;
-int pre[MAX];
-int f(int x){
-    int c=0;
-    while(x){
-        c++;
-        x/=3;
+#define ll long long
+const int N = 2e5 + 5;
+void solve() {
+    ll result = 0;
+    int n, m, k, w;
+    cin >> n >> m >> k >> w;
+    vector<ll> a(w); 
+    for (int i = 0; i < w; i++) {
+        cin >> a[i];
     }
-    return c;
+    vector<ll> l(n + 1, 0);
+    vector<ll> c(m + 1, 0);
+    for (int i = 0; i <= n - k; i++) {
+        l[i]++;
+        l[i + k]--;
+    }
+    for (int i = 0; i <= m - k; i++) {
+        c[i]++;
+        c[i + k]--;
+    }
+    for (int i = 1; i < n; i++) {
+        l[i] += l[i - 1];
+    }
+    for (int i = 1; i < m; i++) {
+        c[i] += c[i - 1];
+    }
+    vector<ll> v;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            v.push_back(l[i] * c[j]);
+        }
+    }
+    sort(v.begin(),v.end(),greater<ll>());
+    sort(a.begin(),a.end(),greater<ll>());
+    for (int i = 0; i < min(w, (int)v.size()); i++) {
+        result+=a[i]*v[i];
+    }
+
+    cout << result << endl;
 }
 
-int main()
-{
-     freopen("a.txt","r",stdin);
-   int t;
-   cin>>t;
-   for(int i =1;i<=2*1e5;i++){
-    pre[i]+=pre[i-1]+f(i);
-   }
-   while(t--){
-       int l,r;cin>>l>>r;
-       int x= pre[r]-pre[l-1];
-       int v=f(l);
-       if((l*2+1)==f(r)){
-        cout<<10<<endl;
-        continue;
-       }
-       cout<<x+v<<endl;
-   }
-   return 0;
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
 }
