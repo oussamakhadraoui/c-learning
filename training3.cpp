@@ -37,12 +37,27 @@ public:
         return result;
     }
 };
-
+#include <bits/stdc++.h>
+using namespace std;
 int main (){
 	freopen("a.txt","r",stdin);
-	vector<int>x{1,1,4,2,1,3};
-int k=5;
- Solution().heightChecker(x);
+	int n;
+    cin>>n;
+    vector<int>num(n);
+    for(int i =0;i<n;i++){
+        cin>>num[i];
+    }
+    unordered_map<int,int>rec;
+    for(int i =0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            rec[num[i]+num[j]]++;
+        }
+    }
+    int result=0;
+    for(auto&[key,val]:rec){
+        result=max(result,val);
+    }
+    cout<<result<<endl;
  
 	return 0;
 }
