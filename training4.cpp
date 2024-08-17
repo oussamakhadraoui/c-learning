@@ -214,13 +214,24 @@ void solve() {
 using namespace std;
 int main() {
    freopen("a.txt", "r", stdin);
-    int x ,r1,r2;
-    cin>>x>>r1>>r2;
-    double b =(r1*r1-r2*r2+x*x)/(2*x);
-    double a=sqrt(r1*r1-b*b)*(-1);
-    cout<<b<<endl;
-    cout<<a<<endl;
-    return 0;
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int count=0;
+        for(int i =0;i<n;i++){
+            char no;
+            cin>>no;
+            if(no=='1')count--;
+            else count++;
+            if(count<0)count+=4;
+        }
+        vector<char>s={'E','S','W','N'};
+        char c=s[count%4];
+        cout<<c<<endl;
+
+    }
 }
 // #include <bits/stdc++.h>
 // using namespace std;
