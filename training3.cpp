@@ -41,23 +41,21 @@ public:
 using namespace std;
 int main (){
 	freopen("a.txt","r",stdin);
-	int n;
-    cin>>n;
-    vector<int>num(n);
-    for(int i =0;i<n;i++){
-        cin>>num[i];
-    }
-    unordered_map<int,int>rec;
-    for(int i =0;i<n;i++){
-        for(int j=i+1;j<n;j++){
-            rec[num[i]+num[j]]++;
+	int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int count=0;
+        for(int i =0;i<n;i++){
+            int num;
+            cin>>num;
+            if(num%2==0)count++;
         }
+        if(count==n)cout<<-1<<endl;
+        else cout<<count<<endl;
     }
-    int result=0;
-    for(auto&[key,val]:rec){
-        result=max(result,val);
-    }
-    cout<<result<<endl;
+
  
 	return 0;
 }
