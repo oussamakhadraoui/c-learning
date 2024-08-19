@@ -217,19 +217,28 @@ int main() {
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
+        int n,k;
+        cin>>n>>k;
         int count=0;
+        vector<int>rec;
         for(int i =0;i<n;i++){
-            char no;
+            int no;
             cin>>no;
-            if(no=='1')count--;
-            else count++;
-            if(count<0)count+=4;
+            if(no>=k)count++;
+            else rec.push_back(no);
         }
-        vector<char>s={'E','S','W','N'};
-        char c=s[count%4];
-        cout<<c<<endl;
+        sort(rec.begin(),rec.end());
+        int i =0;
+        int j = rec.size()-1;
+        while(i<j){
+            if(rec[i]+rec[j]>=k){
+                count++;
+                i++;j--;
+            }else{
+                i++;
+            }
+        };
+        cout<<count<<endl;
 
     }
 }
