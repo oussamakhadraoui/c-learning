@@ -1,42 +1,24 @@
-#include <bits/stdc++.h>
-#include <vector>
-
-using namespace std;
 class Solution {
 public:
-    string fractionAddition(string s) {
-        int up =0;
-        int down=1;
-        int n =s.size();
-        int i =0;
-        int signe=1;
-        while(i<n){
-            if(s[i]=='-'){
-                signe=-1;
-                i++;
-            }else signe=1;
-            
-            int top=0;
-            while(i<n&&isdigit(s[i])){
-                top=top*10+(s[i]-'0');
-                i++;
+    int countPairs(vector<int>& nums) {
+        int result=0;
+        for(int i =0;i<nums.size();i++){
+            string comp=to_string(nums[i]);
+            for(int j=i+1;j<nums.size();j++){
+                string comp2=to_string(nums[j]);
+                for(int k=0;k<comp2.size();k++){
+                    for(int kk=k+1;kk<comp2.size();kk++){
+                        swap(comp2[k],comp2[kk]);
+                        if(comp2==comp){
+                            result++;
+                            k=comp2.size();
+                            kk=comp2.size();
+                        }
+                        swap(comp2[k],comp2[kk]);
+                    }
+                }
             }
-            top*=signe;
-            i++;
-            int bot=0;
-            while(i<n&&isdigit(s[i])){
-                bot=bot*10+(s[i]-'0');
-                i++;
-            }
-            up=up*bot+top*down;
-            down=down*bot;
         }
-        int pgcd=gcd(up,down);
-        return to_string(up/pgcd)+"/"+to_string(down/pgcd);
+        return result;
     }
 };
-int main() {
-    string n ="1/3-1/2";
-    Solution().fractionAddition(n);
-    return 0;
-}
