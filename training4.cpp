@@ -212,35 +212,38 @@ void solve() {
 
 #include <bits/stdc++.h>
 using namespace std;
-int main() {
-   freopen("a.txt", "r", stdin);
-    int t;
-    cin>>t;
-    while(t--){
-        int n,k;
-        cin>>n>>k;
-        int count=0;
-        vector<int>rec;
-        for(int i =0;i<n;i++){
-            int no;
-            cin>>no;
-            if(no>=k)count++;
-            else rec.push_back(no);
-        }
-        sort(rec.begin(),rec.end());
-        int i =0;
-        int j = rec.size()-1;
-        while(i<j){
-            if(rec[i]+rec[j]>=k){
-                count++;
-                i++;j--;
-            }else{
-                i++;
+class Solution {
+public:
+    int countPairs(vector<int>& nums) {
+        int result=0;
+ 
+        for(int i =0;i<nums.size();i++){
+            string comp=to_string(nums[i]);
+            for(int j=0;j<nums.size();j++){
+                if(i==j)continue;
+                string comp2=to_string(nums[j]);
+                if(comp.size()<comp2.size())continue;
+                while(comp2.size()!=comp.size())comp2="0"+comp2;
+                for(int k=0;k<comp2.size();k++){
+                    for(int kk=k+1;kk<comp2.size();kk++){
+                        swap(comp2[k],comp2[kk]);
+                        if(comp2==comp){
+                            result++;
+                            k=comp2.size();
+                            kk=comp2.size();
+                        }
+                        swap(comp2[k],comp2[kk]);
+                    }
+                }
             }
-        };
-        cout<<count<<endl;
-
+        }
+        return result;
     }
+};
+int main() {
+   vector<int>nums={3,12,30,17,21};
+   Solution().countPairs(nums);
+    return 0;
 }
 // #include <bits/stdc++.h>
 // using namespace std;
