@@ -212,37 +212,13 @@ void solve() {
 
 #include <bits/stdc++.h>
 using namespace std;
-class Solution {
-public:
-    int countPairs(vector<int>& nums) {
-        int result=0;
- 
-        for(int i =0;i<nums.size();i++){
-            string comp=to_string(nums[i]);
-            for(int j=0;j<nums.size();j++){
-                if(i==j)continue;
-                string comp2=to_string(nums[j]);
-                if(comp.size()<comp2.size())continue;
-                while(comp2.size()!=comp.size())comp2="0"+comp2;
-                for(int k=0;k<comp2.size();k++){
-                    for(int kk=k+1;kk<comp2.size();kk++){
-                        swap(comp2[k],comp2[kk]);
-                        if(comp2==comp){
-                            result++;
-                            k=comp2.size();
-                            kk=comp2.size();
-                        }
-                        swap(comp2[k],comp2[kk]);
-                    }
-                }
-            }
-        }
-        return result;
-    }
-};
+
 int main() {
-   vector<int>nums={3,12,30,17,21};
-   Solution().countPairs(nums);
+freopen("a.txt", "r", stdin);
+    long long a,b,c,d;
+    cin>>a>>b>>c>>d;
+    long long x=(a%100)*(b%100)*(c%100)*(d%100);
+    cout<<setw(2)<<setfill('0')<<x%100<<endl;
     return 0;
 }
 // #include <bits/stdc++.h>
