@@ -215,10 +215,15 @@ using namespace std;
 
 int main() {
 freopen("a.txt", "r", stdin);
-    long long a,b,c,d;
-    cin>>a>>b>>c>>d;
-    long long x=(a%100)*(b%100)*(c%100)*(d%100);
-    cout<<setw(2)<<setfill('0')<<x%100<<endl;
+    long long a,k,n;
+    cin>>n>>k>>a;
+    if((n*k)%a!=0){
+        cout<<"double"<<endl;
+    }else if((n*k)/a<=2147483647&&((n*k)/a)>=(-2147483648)){
+        cout<<"int"<<endl;
+    }else{
+        cout<<"long long"<<endl;
+    }
     return 0;
 }
 // #include <bits/stdc++.h>
