@@ -2,19 +2,20 @@
 using namespace std;
 int main (){
  freopen("a.txt", "r", stdin);
+	int x,y,z ;
+	cin>>x>>y>>z;
+	int maxi= max({x,y,z});
+	int mini= min({x,y,z});
+	int result=INT_MAX;
 
- string s;
-	cin >> s;
-	int n = s.size();
- unordered_map<string,int>rec;
-	for(int i = 1; i < n; i++){
-		if(s.substr(i, n - i) == s.substr(0, n - i) && i < n - i){
-			cout << "YES\n";
-			cout << s.substr(i, n - i);
-			return;
-		}
+	for(int i =mini;i<=maxi;i++){
+			int sum=abs(i-x)+abs(i-y)+abs(i-z);
+			if(sum<result){
+					result=sum;
+			}
 	}
-	cout << "NO\n";
+ cout<<result<<endl;
+	
 
  return 0;
 }
