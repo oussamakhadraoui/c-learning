@@ -321,23 +321,47 @@ using namespace std;
 //     return 0;
 // }
 
+const int N= 1e4+1;
 class Solution {
 public:
-    bool checkSubarraySum(vector<int>& nums, int k) {
-        int n = nums.size();
-        vector<int>sum(n);
-        sum[0]=nums[0];
-        for(int i =1;i<n;i++){
-            sum[i]=sum[i-1]+nums[i];
-            if(sum[i]%k==0)return true;
+    long long minDamage(int power, vector<int>& damage, vector<int>& health) {
+        int n = damage.size();
+        vector<pair<int,int>> en(n);
+        
+        for(int i = 0; i < n; i++) {
+            en[i] = {damage[i], health[i]};
         }
-        return false;
+        
+        sort(en.begin(), en.end(), [](pair<int, int>& a, pair<int, int>& b) {
+            return a.first > b.first; 
+        });
+        
+        long long totalDamage = 0;
+        long long sum = 0;
+
+        for(int i = 0; i < n; i++) sum += en[i].first;
+
+        long long result = 0;
+
+        for(int i = 0; i < n; i++) {
+
+            int time = ceil((double)en[i].second / power);
+
+            result += sum * time;
+
+            sum -= en[i].first;
+        }
+        
+        return result;
     }
 };
 int main (){
-    vector<int>v {23,2,4,6,7};
-    reverse(v.begin(),v.end());
+    vector<vector<int>>n={{0,1},{1,2},{0,2}};
+    vector<double> d={0.5,0.5,0.2};
+    vector<int>damage ={80,79};
+    vector<int>health ={86,13};
     int k = 6;
-    bool x= Solution().checkSubarraySum(v,k);
+    double x= Solution().minDamage(62,damage,health);
+    cout<<x<<endl;
     return 0;
 }
