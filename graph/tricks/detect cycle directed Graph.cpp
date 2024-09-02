@@ -1,30 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-const int N =1e5+1;
-bool vis[N];
-bool parent[N];
-
+const int N=2001;
 class Solution {
-  public:
-    bool dfs(vector<int> adj[],int pos){
-        vis[pos]=true;
-        parent[pos]=true;
-        for(int& x:adj[pos]){
-          if(vis[x]&&parent[x])return true;
-          else if(!vis[x]&&dfs(adj,x))return true;
-          
+public:
+    bool vis[N];
+    bool parent[N];
+    bool dfs(vector<int>graph[],int i ){
+        vis[i]=true;
+        parent[i]=true;
+        for(auto &x:graph[i]){
+            if(vis[x]&&parent[x])return true;
+            if(!vis[x]&&dfs(graph,x))return true;
         }
-        parent[pos]=false;
+        parent[i]=false;
         return false;
     }
-    // Function to detect cycle in a directed graph.
-    bool isCyclic(int V, vector<int> adj[]) {
-        memset(vis,false,sizeof(vis));
-        memset(parent,false,sizeof(parent));
-        for(int i =0;i<V;i++){
-            if(!vis[i]&& dfs(adj,i))return true;
+    bool canFinish(int n, vector<vector<int>>& p) {
+        vector<int>graph[n];
+        for(auto&x:p)graph[x[0]].push_back(x[1]);
+        for(int i =0;i<n;i++){
+            if(dfs(graph,i))return false;
         }
-        return false;
+        return true;
     }
 };
