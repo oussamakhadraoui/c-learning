@@ -74,108 +74,91 @@
     
 //     return 0;
 // }
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <limits>
 
+
+
+
+/////////////////////////////////////
+// #include <bits/stdc++.h>
+
+// using namespace std;
+
+// int main() {
+//     freopen("a.txt", "r", stdin);
+//     int t;
+//     cin >> t;
+//     while (t--) {
+//         int n;
+//         cin>>n;
+//         vector<string>s(n);
+//         for(int i=n-1;i>=0;i--){
+//             cin>>s[i];
+//         }
+//         for(int i =0;i<n;i++){
+//             for(int j=0;j<4;j++){
+//                 if(s[i][j]!='.'){
+//                     cout<<j+1<<" ";
+//                     j=4;
+//                 }
+//             }
+//         }
+//                 cout<<endl;
+
+//     }
+//     return 0;
+// }
+#include <bits/stdc++.h>
+#define ll long long
 using namespace std;
 
+int computeZeros(int start, string& s, vector<ll>& links, vector<int>& results) {
+    if (results[start] != -1) return results[start];
+    int zeroCount = 0, current = start;
+    vector<int> visited;
+
+    while (results[current] == -1) {
+        visited.push_back(current);
+        results[current] = 0;
+        if (s[current] == '0') zeroCount++;
+        current = links[current];
+    }
+
+    if (results[current] > 0) zeroCount += results[current];
+    for (int idx : visited) results[idx] = zeroCount;
+
+    return zeroCount;
+}
+
+void handleCase() {
+    int size;
+    cin >> size;
+    vector<ll> links(size);
+    for (int i = 0; i < size; i++) {
+        ll pos;
+        cin >> pos;
+        links[i] = pos - 1;
+    }
+
+    string s;
+    cin >> s;
+    vector<int> results(size, -1);
+
+    for (int i = 0; i < size; i++) {
+        if (results[i] == -1) computeZeros(i, s, links, results);
+    }
+
+    for (int i = 0; i < size; i++) {
+        cout << results[i] << " ";
+    }
+    cout << endl;
+}
+
 int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        int length;
-        cin >> length;
-        string str;
-        cin >> str;
-        if (length % 2 == 0) {
-            unordered_map<char, int> even_count,odd_count;
-            for (int i = 0; i < str.length(); i++) {
-                if (i % 2 == 0) {
-                    even_count[str[i]]++;
-                } else {
-                    odd_count[str[i]]++;
-                }
-            }
-            char eveM_char = ' ';
-            int eveM = 0;
-            for (const auto& ee : even_count) {
-                if (ee.second > eveM) {
-                    eveM = ee.second;
-                    eveM_char = ee.first;
-                }
-            }
-            char pddM_char = ' ';
-            int pddM = 0;
-            for (const auto& ee : odd_count) {
-                if (ee.second > pddM) {
-                    pddM = ee.second;
-                    pddM_char = ee.first;
-                }
-            }
-
-            int result = length / 2 - eveM + length / 2 - pddM;
-            cout << result << endl;
-        } else {
-            if (length == 1) {
-                cout << 1 << endl;
-                continue;
-            }
-
-            int diffM = numeric_limits<int>::max();
-            unordered_map<char, int> even_count,odd_count;
-            for (int i = 0; i < length - 1; i++) {
-                if (i % 2 == 0) {
-                    even_count[str[i]]++;
-                } else {
-                    odd_count[str[i]]++;
-                }
-            }
-            unordered_map<char, int> future_even_count, future_odd_count;
-            int eveM = 0;
-            for (const auto& ee : even_count) {
-                eveM = max(eveM, ee.second);
-            }
-            int pddM = 0;
-            for (const auto& ee : odd_count) {
-                pddM = max(pddM, ee.second);
-            }
-            diffM = min(diffM, length / 2 - eveM + length / 2 - pddM);
-            for (int i = length - 2; i >= 0; i--) {
-                if (i % 2 == 0) {
-                    even_count[str[i]]--;
-                    future_even_count[str[i + 1]]++;
-                } else {
-                    odd_count[str[i]]--;
-                    future_odd_count[str[i + 1]]++;
-                }
-                unordered_map<char, int> mevenCount = even_count;
-                unordered_map<char, int> mergodd = odd_count;
-                for (const auto& ee : future_even_count) {
-                    mevenCount[ee.first] += ee.second;
-                }
-                for (const auto& ee : future_odd_count) {
-                    mergodd[ee.first] += ee.second;
-                }
-                eveM = 0;
-                for (const auto& ee : mevenCount) {
-                    eveM = max(eveM, ee.second);
-                }
-                pddM = 0;
-                for (const auto& ee : mergodd) {
-                    pddM = max(pddM, ee.second);
-                }
-
-                diffM = min(diffM, length / 2 - eveM + length / 2 - pddM);
-            }
-            if (length < 2) {
-                cout << diffM + 2 << endl;
-            } else {
-                cout << diffM + 1 << endl;
-            }
-        }
+    freopen("a.txt", "r", stdin);
+    int testCases;
+    cin >> testCases;
+    while (testCases--) {
+        handleCase();
     }
     return 0;
 }
