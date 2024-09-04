@@ -324,44 +324,43 @@ using namespace std;
 const int N= 1e4+1;
 class Solution {
 public:
-    long long minDamage(int power, vector<int>& damage, vector<int>& health) {
-        int n = damage.size();
-        vector<pair<int,int>> en(n);
+    int maxScore(vector<vector<int>>& grid) {
+        int result = 0;
+        vector<pair<int, int>> nums;
         
-        for(int i = 0; i < n; i++) {
-            en[i] = {damage[i], health[i]};
+        // Collect all the elements in grid along with their row indices
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid[0].size(); j++) {
+                nums.push_back({grid[i][j], i});
+            }
         }
+
+        sort(nums.rbegin(), nums.rend());
+
+        unordered_set<int> selectedRows;
+        unordered_set<int> usedValues;
         
-        sort(en.begin(), en.end(), [](pair<int, int>& a, pair<int, int>& b) {
-            return a.first > b.first; 
-        });
-        
-        long long totalDamage = 0;
-        long long sum = 0;
+        for (auto& [value, row] : nums) {
 
-        for(int i = 0; i < n; i++) sum += en[i].first;
+            if (selectedRows.find(row) == selectedRows.end() && usedValues.find(value) == usedValues.end()) {
+                result += value;
+                selectedRows.insert(row);
+                usedValues.insert(value);
+            }
 
-        long long result = 0;
 
-        for(int i = 0; i < n; i++) {
-
-            int time = ceil((double)en[i].second / power);
-
-            result += sum * time;
-
-            sum -= en[i].first;
         }
         
         return result;
     }
 };
 int main (){
-    vector<vector<int>>n={{0,1},{1,2},{0,2}};
+    vector<vector<int>>n={{19,18},{1,14},{4,14}};
     vector<double> d={0.5,0.5,0.2};
     vector<int>damage ={80,79};
     vector<int>health ={86,13};
     int k = 6;
-    double x= Solution().minDamage(62,damage,health);
+    double x= Solution().maxScore(n);
     cout<<x<<endl;
     return 0;
 }
