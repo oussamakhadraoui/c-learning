@@ -111,54 +111,27 @@
 #define ll long long
 using namespace std;
 
-int computeZeros(int start, string& s, vector<ll>& links, vector<int>& results) {
-    if (results[start] != -1) return results[start];
-    int zeroCount = 0, current = start;
-    vector<int> visited;
-
-    while (results[current] == -1) {
-        visited.push_back(current);
-        results[current] = 0;
-        if (s[current] == '0') zeroCount++;
-        current = links[current];
-    }
-
-    if (results[current] > 0) zeroCount += results[current];
-    for (int idx : visited) results[idx] = zeroCount;
-
-    return zeroCount;
-}
-
-void handleCase() {
-    int size;
-    cin >> size;
-    vector<ll> links(size);
-    for (int i = 0; i < size; i++) {
-        ll pos;
-        cin >> pos;
-        links[i] = pos - 1;
-    }
-
-    string s;
-    cin >> s;
-    vector<int> results(size, -1);
-
-    for (int i = 0; i < size; i++) {
-        if (results[i] == -1) computeZeros(i, s, links, results);
-    }
-
-    for (int i = 0; i < size; i++) {
-        cout << results[i] << " ";
-    }
-    cout << endl;
-}
 
 int main() {
     freopen("a.txt", "r", stdin);
     int testCases;
     cin >> testCases;
     while (testCases--) {
-        handleCase();
+        int n,k;
+        cin>>n>>k;
+        if(n>k)cout<<"NO"<<endl;
+        else{
+            if(n%k==0){
+                cout<<"YES"<<endl;
+                int time=n/k;
+                while(k--){
+                    cout<<time<<" ";
+                }
+                cout<<endl;
+            }else{
+                
+            }
+        }
     }
     return 0;
 }
