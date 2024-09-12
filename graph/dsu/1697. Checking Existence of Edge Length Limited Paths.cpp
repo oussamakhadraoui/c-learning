@@ -6,7 +6,7 @@ class DSU{
     vector<ll>rank,parent;
     DSU(ll n){
         parent.resize(n,0);
-        rank.resize(n),0;
+        rank.resize(n);
         for(ll i=0;i<n;i++)parent[i]=i;
     }
     ll find(ll x){
