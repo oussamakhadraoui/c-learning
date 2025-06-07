@@ -1,0 +1,30 @@
+Holiday Struggle
+Time limit: 3000 ms Memory limit: 512 MB
+Molly and Bob want to go on holidays and they need to be really careful as their budget is low and should make a wise choice for their destination, so, they asked a travel agency about holiday offers for the next days. The agency replied with a list of flights. Each flights starts in some city ss and goes to another city tt and has a fixed cost.
+A trip from city u0u0 to city ukuk is a sequence of flights (u0,u1),(u1,u2),...,(uk−1,uk)(u0,u1),(u1,u2 ),...,(uk−1,uk) and its cost is equal to the cost of each flight used.
+Molly and Bob are considering different destinations, so you have to find the trip to each chosen destination with the lowest price possible such that it's within their budget or report that there is no such trip.
+Standard input
+At the first line, you are given the number of offers nn, the starting city srcsrc and the total budget bb. Then nn lines follows, each with 2 cities ss and tt and the cost of the tickets from ss to tt.
+At the (n+1)(n+1)-th line you are given the number of queries qq, then qq lines follows, each with one destination.
+Standard output
+For each destionation, print the minimum cost of a trip from the starting city to it. If no trip within the budget exists, print NONE.
+Constraints and notes
+• 1≤n,q≤2⋅1051≤n,q≤2⋅105.
+• 1≤b≤1091≤b≤109.
+• It is guaranteed that there are no cycles in the trip network.
+• The name of each city is at most 2020.
+Input
+Output
+9 ATHENS 300 180 ATHENS MILAN 120 280 MILAN PARIS 20 NONE MILAN MALTA 250
+
+Input Output
+PARIS PORTO 140
+ATHENS PORTO 300 ROME MALTA 110
+MALTA BERLIN 190 ATHENS AMSTERDAM 310 ATHENS ROME 70
+3
+MALTA PORTO AMSTERDAM
+14 PORTHARCOURT 34 NONE PORTHARCOURT PUNE 70 NONE PORTHARCOURT NDJAMENA 64 NONE SANJOSE NDJAMENA 11 NONE PORTHARCOURT PUNE 60 NONE PORTHARCOURT PUNE 19
+LONDON PUNE 30
+NDJAMENA PUNE 10 PORTHARCOURT PUNE 49 SANJOSE NDJAMENA 84 PORTHARCOURT NDJAMENA 69 SANJOSE LONDON 72
+LONDON PORTHARCOURT 25 SANJOSE PUNE 99
+SANJOSE PUNE 77
